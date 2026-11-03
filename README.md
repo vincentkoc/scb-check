@@ -74,11 +74,12 @@ scb-check rule RULE_ID                  # print YAML or metadata for a specific 
 
 Clone detection only emits duplicated syntax blocks spanning at least three `SLOC` with at least two executable statements in one statement body. Function signatures, comments, blanks, Python docstrings, and expression operands do not satisfy the statement threshold. Expression-bodied arrows are excluded. Displayed clone line counts and `--min-duplicate-lines` still use duplicated `SLOC` in the clone span.
 
-This fork identifies that scoring policy as `statement-bodies-v1` in its [clone quality evaluation](evals/README.md) and uses version `0.2.0+vk.2`. Treat scores from other engine versions as separate baselines. The TypeScript grammar is an exact Git-pinned
+This fork identifies that scoring policy as `statement-bodies-v1` in its [clone quality evaluation](evals/README.md) and uses version `0.2.0+vk.3`. Treat scores from other engine versions as separate baselines. The TypeScript grammar is an exact Git-pinned
 [fork](https://github.com/vincentkoc/tree-sitter-typescript) built from checked-in
 C sources. Installation requires a C compiler and Python development headers;
 Node.js is required only for grammar regeneration. This is a source release,
-not a PyPI release.
+not a PyPI release. Generic awaited calls and postfix chains retain their AST
+ownership. Known grammar gaps remain documented in the native fork.
 
 ## Configuration
 

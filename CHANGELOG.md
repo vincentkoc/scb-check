@@ -2,6 +2,22 @@
 
 All notable user-facing changes to `scb-check` are documented here.
 
+## [0.2.0+vk.3] - 2026-11-03
+
+### Fixed
+
+- Pin the native grammar that keeps generic calls and postfix chains inside
+  await expressions while preserving comparisons, constructors and parentheses.
+- Promote the three generic-await ownership regressions to passing assertions.
+
+### Added
+
+- Six labelled TypeScript generic-await clone controls, expanding the regression
+  suite to 60 cases without changing clone thresholds or score weights.
+- Source-span and chain-ownership checks through the analysis engine. Grammar
+  changes require a fresh measurement baseline; remaining native gaps stay
+  documented in the grammar fork.
+
 ## [0.2.0+vk.2] - 2026-11-03
 
 ### Fixed

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "scb-check"
-version = "0.2.0+vk.2"
+version = "0.2.0+vk.3"
 description = "CLI for measuring verbosity and erosion metrics in supported source codebases"
 readme = "README.md"
 license = "MIT"
@@ -19,7 +19,7 @@ dependencies = [
     "pydantic==2.13.3",
     "tree-sitter-rust==0.24.2",
     "tree-sitter-javascript==0.25.0",
-    "tree-sitter-typescript @ git+https://github.com/vincentkoc/tree-sitter-typescript@11b6b729d31a9161a04abdbd0904de0780003b50",
+    "tree-sitter-typescript @ git+https://github.com/vincentkoc/tree-sitter-typescript@2ec69f5037f56a99a0d0c0e1a191d0eef50afe49",
     "tree-sitter-zig==1.1.2",
     "tree-sitter-haskell==0.23.1",
     "tree-sitter-cpp==0.23.4",

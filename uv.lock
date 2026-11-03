@@ -424,7 +424,7 @@ wheels = [
 
 [[package]]
 name = "scb-check"
-version = "0.2.0+vk.2"
+version = "0.2.0+vk.3"
 source = { editable = "." }
 dependencies = [
     { name = "ast-grep-cli" },
@@ -465,7 +465,7 @@ requires-dist = [
     { name = "tree-sitter-javascript", specifier = "==0.25.0" },
     { name = "tree-sitter-python", specifier = "==0.25.0" },
     { name = "tree-sitter-rust", specifier = "==0.24.2" },
-    { name = "tree-sitter-typescript", git = "https://github.com/vincentkoc/tree-sitter-typescript?rev=11b6b729d31a9161a04abdbd0904de0780003b50" },
+    { name = "tree-sitter-typescript", git = "https://github.com/vincentkoc/tree-sitter-typescript?rev=2ec69f5037f56a99a0d0c0e1a191d0eef50afe49" },
     { name = "tree-sitter-zig", specifier = "==1.1.2" },
     { name = "typer", specifier = "==0.24.2" },
 ]
@@ -608,8 +608,8 @@ wheels = [
 
 [[package]]
 name = "tree-sitter-typescript"
-version = "0.23.2+vk.1"
-source = { git = "https://github.com/vincentkoc/tree-sitter-typescript?rev=11b6b729d31a9161a04abdbd0904de0780003b50#11b6b729d31a9161a04abdbd0904de0780003b50" }
+version = "0.23.2+vk.2"
+source = { git = "https://github.com/vincentkoc/tree-sitter-typescript?rev=2ec69f5037f56a99a0d0c0e1a191d0eef50afe49#2ec69f5037f56a99a0d0c0e1a191d0eef50afe49" }
 
 [[package]]
 name = "tree-sitter-zig"

@@ -53,7 +53,11 @@ def test_eval_reports_missed_labels(tmp_path: Path) -> None:
 def test_eval_rejects_wrong_groups(tmp_path: Path) -> None:
     """Matching spans cannot hide incorrectly merged clone families."""
     corpus = json.loads(json.dumps(_CORPUS))
-    case = corpus["cases"][-1]
+    case = next(
+        case
+        for case in corpus["cases"]
+        if case["id"] == "ts-independent-groups"
+    )
     case["expected_groups"] = [
         [span for group in case["expected_groups"] for span in group]
     ]

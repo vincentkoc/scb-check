@@ -8,16 +8,18 @@ wrappers are excluded. Separate branch arms do not contribute a combined count.
 
 ## Labelled regression suite
 
-`clone_cases.json` contains 54 synthetic, manually labelled policy examples in
+`clone_cases.json` contains 60 synthetic, manually labelled policy examples in
 Python, JavaScript, TypeScript, Rust, C++, Zig, and Haskell. Each case provides
 two or more files and exact expected clone spans and group membership. The suite includes real
 two-statement clones, methods, async functions, generators, loops, nested
-branches, wrappers, comments/docstrings, expression arrows, and operator changes.
+branches, wrappers, comments/docstrings, expression arrows, and operator changes. Six
+generic-await controls exercise call/member/subscript chains, non-null assertions,
+parentheses, wrappers, concise arrows and distinct comparisons.
 The array-predicate regression is a reduced pattern from public
 [`device-bootstrap-profile.ts`](https://github.com/openclaw/openclaw/blob/c67556df310f7cc50798ef51beac33a43714356a/src/shared/device-bootstrap-profile.ts).
 
 The `tune` partition contains 16 minimal boundary cases. The `holdout` partition
-contains 38 additional pattern and language controls. These are correlated,
+contains 44 additional pattern and language controls. These are correlated,
 deliberately selected regressions, not an independent estimate of precision on
 arbitrary software. A label says whether a syntax block satisfies this clone
 policy; it does not say whether a developer should refactor it.
@@ -98,6 +100,23 @@ an application-code improvement or a measured precision gain.
 The native regression set covers type-only wildcard exports, import member
 type arguments, arrays, indexed/parenthesized types, invalid forms and ordinary
 expression controls in TS and TSX. The scanner still supports `.ts`, not `.tsx`.
-Generic-await AST ownership remains an inherited limitation, recorded explicitly
-as expected-failure tests and separate from passing syntax controls. No source
+In that baseline, generic-await AST ownership was an inherited limitation,
+recorded as expected-failure tests separately from passing syntax controls. No source
 preprocessing or metric-weight changes are used.
+
+
+## Await ownership baseline
+
+[`await_results.json`](await_results.json) records `0.2.0+vk.3`, which pins the
+repaired native grammar and adds six labelled holdout
+controls. The clone policy and metric weights stay unchanged. These correlated
+regressions do not establish independent precision; AST ownership is checked by
+parser assertions and the native fork's compiler-reference suite, not clone labels.
+Use a new baseline because corrected AST grouping can change structural hashes.
+
+All 60 cases pass with zero labelled false positives or negatives. All 50 frozen
+files parse. Their 14,845 `SLOC`, function-symbol digest, 282 clone `SLOC`, 23
+groups, group spans and structural hashes match the previous coverage baseline.
+The native compiler-reference suite improves valid AST matches from 45 to 92
+of 100 vectors per dialect; eight valid gaps and one invalid-syntax gap remain
+explicitly recorded there. Passing clone labels do not imply complete parser coverage.

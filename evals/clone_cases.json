@@ -1184,6 +1184,141 @@
           ]
         ]
       ]
+    },
+    {
+      "id": "ts-generic-await-call",
+      "split": "holdout",
+      "reason": "A generic awaited call followed by return remains a two-statement clone.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "async function first(load) {\n  const actual = await load<Module>();\n  return actual;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "async function second(load) {\n  const actual = await load<Module>();\n  return actual;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-generic-await-member-subscript",
+      "split": "holdout",
+      "reason": "Generic calls with member and subscript suffixes retain genuine clone recall.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "async function first(api) {\n  const actual = await api.load<Module>().items[0];\n  return actual;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "async function second(api) {\n  const actual = await api.load<Module>().items[0];\n  return actual;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-generic-await-parenthesized-non-null",
+      "split": "holdout",
+      "reason": "Non-null assertions and parenthesized await expressions preserve multi-statement clones.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "async function first(load) {\n  const actual = (await load<Module>()!).items[0];\n  return actual;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "async function second(load) {\n  const actual = (await load<Module>()!).items[0];\n  return actual;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-generic-await-return-wrapper",
+      "split": "holdout",
+      "reason": "An idiomatic multi-line return-await wrapper remains one body statement.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "async function first(load, input) {\n  return await load<Module>(\n    input,\n  );\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "async function second(load, input) {\n  return await load<Module>(\n    input,\n  );\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-generic-await-concise-arrow",
+      "split": "holdout",
+      "reason": "A generic awaited expression spanning more than three SLOC is not a statement-body clone.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "const first = async (load, input) =>\n  await load<Module>(\n    input,\n  )!.items[0];\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "const second = async (load, input) =>\n  await load<Module>(\n    input,\n  )!.items[0];\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-generic-await-distinct-comparisons",
+      "split": "holdout",
+      "reason": "Comparisons following generic awaited calls retain distinct relational operators.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "async function first(load, limit) {\n  const actual = await load<Module>() < limit;\n  return actual;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "async function second(load, limit) {\n  const actual = await load<Module>() > limit;\n  return actual;\n}\n"
+        }
+      ],
+      "expected_groups": []
     }
   ]
 }
