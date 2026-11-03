@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "policy": "statement-bodies-v1",
+  "comparison": "Clone analyzer substitution with common frozen parser dependencies; not full historical package benchmarks.",
+  "dependency_lock_sha256": "0df81021899d87ea9dc9d63d96412f3284b0499f5b0a657ab1463439cf7d2993",
+  "suite_sha256": "3209d49cfb9f36137710e2764006a4594d56cb5967b391865c658f1db2b1ee55",
+  "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+  "results": [
+    {
+      "analyzer": "pypi:scb-check==0.2.0",
+      "analyzer_sha256": "528c3693ac0014afe1ffe9f25fe3389458e55334dc6c9dea20f360440f4dad46",
+      "splits": {
+        "holdout": {
+          "cases": 38,
+          "passed": 23,
+          "tp": 42,
+          "fp": 34,
+          "fn": 0,
+          "precision": 0.5526315789473685,
+          "recall": 1.0
+        },
+        "tune": {
+          "cases": 16,
+          "passed": 10,
+          "tp": 6,
+          "fp": 12,
+          "fn": 0,
+          "precision": 0.3333333333333333,
+          "recall": 1.0
+        }
+      },
+      "failures": [
+        "js-return-wrapper",
+        "js-multiline-binary-arrow",
+        "js-object-arrow",
+        "js-conditional-arrow",
+        "js-call-arrow",
+        "js-array-predicate",
+        "ts-return-wrapper",
+        "ts-multiline-binary-arrow",
+        "ts-object-arrow",
+        "ts-conditional-arrow",
+        "ts-call-arrow",
+        "ts-array-predicate",
+        "python-comment-wrapper",
+        "rs-wrapper",
+        "cpp-wrapper",
+        "zig-wrapper",
+        "hs-wrapper",
+        "js-single-per-arm",
+        "js-sequence-arrow",
+        "ts-single-per-arm",
+        "ts-sequence-arrow"
+      ],
+      "corpus": {
+        "repository": "https://github.com/openclaw/openclaw",
+        "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+        "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+        "requested_files": 50,
+        "files": 47,
+        "parse_failures": [
+          "src/agents/cli-runner.before-agent-reply-cron.test.ts",
+          "src/infra/backup-create.ts",
+          "extensions/codex/src/app-server/run-attempt-test-harness.ts"
+        ],
+        "sloc": 12843,
+        "symbol_sha256": "e28f273fbd1ea1832ab73d4bf0af4f32d24d2501767cf354a707a9aaed2603c2",
+        "clone_sloc": 478,
+        "clone_groups": 39
+      }
+    },
+    {
+      "analyzer": "upstream:a8618228939def726c2ec48b354693e5aa1999d5",
+      "analyzer_sha256": "a3e25a380e1f50fc9a88a4a8986b6e55e8898e8c71c8cf84fcf0397f7f70fd72",
+      "splits": {
+        "holdout": {
+          "cases": 38,
+          "passed": 34,
+          "tp": 42,
+          "fp": 8,
+          "fn": 0,
+          "precision": 0.84,
+          "recall": 1.0
+        },
+        "tune": {
+          "cases": 16,
+          "passed": 8,
+          "tp": 6,
+          "fp": 16,
+          "fn": 0,
+          "precision": 0.2727272727272727,
+          "recall": 1.0
+        }
+      },
+      "failures": [
+        "js-binary-arrow",
+        "js-multiline-binary-arrow",
+        "js-conditional-arrow",
+        "js-call-arrow",
+        "js-compact-two-statements",
+        "js-array-predicate",
+        "ts-binary-arrow",
+        "ts-multiline-binary-arrow",
+        "ts-conditional-arrow",
+        "ts-call-arrow",
+        "ts-compact-two-statements",
+        "ts-array-predicate"
+      ],
+      "corpus": {
+        "repository": "https://github.com/openclaw/openclaw",
+        "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+        "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+        "requested_files": 50,
+        "files": 47,
+        "parse_failures": [
+          "src/agents/cli-runner.before-agent-reply-cron.test.ts",
+          "src/infra/backup-create.ts",
+          "extensions/codex/src/app-server/run-attempt-test-harness.ts"
+        ],
+        "sloc": 12843,
+        "symbol_sha256": "e28f273fbd1ea1832ab73d4bf0af4f32d24d2501767cf354a707a9aaed2603c2",
+        "clone_sloc": 403,
+        "clone_groups": 50
+      }
+    },
+    {
+      "analyzer": "fork:0.2.0+vk.1",
+      "analyzer_sha256": "b6ff40a5fff76ddd8169684eea765f0ab5f0581db73d1ae5017ae4a0c4ec42f7",
+      "splits": {
+        "holdout": {
+          "cases": 38,
+          "passed": 38,
+          "tp": 42,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "tune": {
+          "cases": 16,
+          "passed": 16,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "failures": [],
+      "corpus": {
+        "repository": "https://github.com/openclaw/openclaw",
+        "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+        "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+        "requested_files": 50,
+        "files": 47,
+        "parse_failures": [
+          "src/agents/cli-runner.before-agent-reply-cron.test.ts",
+          "src/infra/backup-create.ts",
+          "extensions/codex/src/app-server/run-attempt-test-harness.ts"
+        ],
+        "sloc": 12843,
+        "symbol_sha256": "e28f273fbd1ea1832ab73d4bf0af4f32d24d2501767cf354a707a9aaed2603c2",
+        "clone_sloc": 250,
+        "clone_groups": 19
+      }
+    }
+  ]
+}

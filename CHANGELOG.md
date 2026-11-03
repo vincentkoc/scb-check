@@ -2,6 +2,21 @@
 
 All notable user-facing changes to `scb-check` are documented here.
 
+## [0.2.0+vk.1] - 2026-11-03
+
+### Fixed
+
+- Restrict clone statement counts to language-configured body containers so
+  arrow expression operands cannot become multi-statement clones.
+- Require at least three `SLOC` independently of the two-statement threshold.
+
+### Added
+
+- A versioned clone quality suite with 54 labelled cases across seven languages,
+  explicit tuning/holdout partitions, and a 50-file content-pinned public
+  OpenClaw corpus. External corpus parse failures remain visible and exit `2`.
+- Fork version `0.2.0+vk.1` to keep changed scores separate from upstream `0.2.0`.
+
 ## [0.2.0] - 2026-05-19
 
 This release summarizes changes since `v0.1.0`.

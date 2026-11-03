@@ -1,0 +1,1189 @@
+{
+  "schema": 1,
+  "policy": "statement-bodies-v1",
+  "cases": [
+    {
+      "id": "js-two-statements",
+      "split": "tune",
+      "reason": "Two executable statements remain detectable across files.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "function first(value) {\n  const next = value + 1;\n  return next;\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "function second(value) {\n  const next = value + 2;\n  return next;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.js",
+            1,
+            4
+          ],
+          [
+            "right.js",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "js-arrow-block",
+      "split": "holdout",
+      "reason": "Block-bodied arrows retain real clone recall.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "const first = (value) => {\n  const next = value + 1;\n  return next;\n};\n"
+        },
+        {
+          "path": "right.js",
+          "source": "const second = (value) => {\n  const next = value + 2;\n  return next;\n};\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.js",
+            1,
+            4
+          ],
+          [
+            "right.js",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "js-async-block",
+      "split": "holdout",
+      "reason": "Await does not suppress a multi-statement body.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "async function first(value) {\n  const next = await read(value);\n  return next;\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "async function second(value) {\n  const next = await read(value);\n  return next;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.js",
+            1,
+            4
+          ],
+          [
+            "right.js",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "js-generator",
+      "split": "holdout",
+      "reason": "Generator bodies remain candidates.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "function* first(value) {\n  const next = value + 1;\n  yield next;\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "function* second(value) {\n  const next = value + 2;\n  yield next;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.js",
+            1,
+            4
+          ],
+          [
+            "right.js",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "js-return-wrapper",
+      "split": "tune",
+      "reason": "A multi-line return remains one statement.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "function first(value) {\n  return transform(\n    value,\n    options,\n  );\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "function second(value) {\n  return transform(\n    value,\n    options,\n  );\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-binary-arrow",
+      "split": "tune",
+      "reason": "Expression operands are not body statements.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "const first = (value) => value + 1;\n"
+        },
+        {
+          "path": "right.js",
+          "source": "const second = (value) => value + 2;\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-multiline-binary-arrow",
+      "split": "tune",
+      "reason": "Expression rejection must not depend on line count.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "const first = (value) =>\n  value +\n  1;\n"
+        },
+        {
+          "path": "right.js",
+          "source": "const second = (value) =>\n  value +\n  1;\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-object-arrow",
+      "split": "holdout",
+      "reason": "Object properties are not executable body statements.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "const first = (value) => ({\n  value: value,\n  active: true,\n});\n"
+        },
+        {
+          "path": "right.js",
+          "source": "const second = (value) => ({\n  value: value,\n  active: true,\n});\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-conditional-arrow",
+      "split": "holdout",
+      "reason": "Conditional branches inside expressions are not statements.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "const first = (value) =>\n  value.ready\n    ? value.left\n    : value.right;\n"
+        },
+        {
+          "path": "right.js",
+          "source": "const second = (value) =>\n  value.ready\n    ? value.left\n    : value.right;\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-call-arrow",
+      "split": "holdout",
+      "reason": "Call operands and arguments are not body statements.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "const first = (value) =>\n  transform(\n    value,\n    options,\n  );\n"
+        },
+        {
+          "path": "right.js",
+          "source": "const second = (value) =>\n  transform(\n    value,\n    options,\n  );\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-compact-two-statements",
+      "split": "tune",
+      "reason": "Keep the three-SLOC floor independently of statement count.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "function first(value) { const next = value + 1; return next; }\n"
+        },
+        {
+          "path": "right.js",
+          "source": "function second(value) { const next = value + 2; return next; }\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-comments",
+      "split": "tune",
+      "reason": "Comments cannot promote a one-statement wrapper.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "function first(value) {\n  // Explain the input.\n  /* Explain the output. */\n  return value;\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "function second(value) {\n  // Explain the input.\n  /* Explain the output. */\n  return value;\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-array-predicate",
+      "split": "tune",
+      "reason": "Reduced public OpenClaw predicate pattern; one expression.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "const first = roles.every(\n  (role, index) =>\n    role ===\n    expected.roles[index],\n);\n"
+        },
+        {
+          "path": "right.js",
+          "source": "const second = roles.every(\n  (role, index) =>\n    role ===\n    expected.roles[index],\n);\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-two-statements",
+      "split": "tune",
+      "reason": "Two executable statements remain detectable across files.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function first(value: number) {\n  const next = value + 1;\n  return next;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function second(value: number) {\n  const next = value + 2;\n  return next;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-arrow-block",
+      "split": "holdout",
+      "reason": "Block-bodied arrows retain real clone recall.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "const first = (value) => {\n  const next = value + 1;\n  return next;\n};\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "const second = (value) => {\n  const next = value + 2;\n  return next;\n};\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-async-block",
+      "split": "holdout",
+      "reason": "Await does not suppress a multi-statement body.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "async function first(value) {\n  const next = await read(value);\n  return next;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "async function second(value) {\n  const next = await read(value);\n  return next;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-generator",
+      "split": "holdout",
+      "reason": "Generator bodies remain candidates.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function* first(value) {\n  const next = value + 1;\n  yield next;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function* second(value) {\n  const next = value + 2;\n  yield next;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-return-wrapper",
+      "split": "tune",
+      "reason": "A multi-line return remains one statement.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function first(value) {\n  return transform(\n    value,\n    options,\n  );\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function second(value) {\n  return transform(\n    value,\n    options,\n  );\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-binary-arrow",
+      "split": "tune",
+      "reason": "Expression operands are not body statements.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "const first = (value) => value + 1;\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "const second = (value) => value + 2;\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-multiline-binary-arrow",
+      "split": "tune",
+      "reason": "Expression rejection must not depend on line count.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "const first = (value) =>\n  value +\n  1;\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "const second = (value) =>\n  value +\n  1;\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-object-arrow",
+      "split": "holdout",
+      "reason": "Object properties are not executable body statements.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "const first = (value) => ({\n  value: value,\n  active: true,\n});\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "const second = (value) => ({\n  value: value,\n  active: true,\n});\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-conditional-arrow",
+      "split": "holdout",
+      "reason": "Conditional branches inside expressions are not statements.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "const first = (value) =>\n  value.ready\n    ? value.left\n    : value.right;\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "const second = (value) =>\n  value.ready\n    ? value.left\n    : value.right;\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-call-arrow",
+      "split": "holdout",
+      "reason": "Call operands and arguments are not body statements.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "const first = (value) =>\n  transform(\n    value,\n    options,\n  );\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "const second = (value) =>\n  transform(\n    value,\n    options,\n  );\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-compact-two-statements",
+      "split": "tune",
+      "reason": "Keep the three-SLOC floor independently of statement count.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function first(value) { const next = value + 1; return next; }\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function second(value) { const next = value + 2; return next; }\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-comments",
+      "split": "tune",
+      "reason": "Comments cannot promote a one-statement wrapper.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function first(value) {\n  // Explain the input.\n  /* Explain the output. */\n  return value;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function second(value) {\n  // Explain the input.\n  /* Explain the output. */\n  return value;\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-array-predicate",
+      "split": "tune",
+      "reason": "Reduced public OpenClaw predicate pattern; one expression.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "const first = roles.every(\n  (role, index) =>\n    role ===\n    expected.roles[index],\n);\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "const second = roles.every(\n  (role, index) =>\n    role ===\n    expected.roles[index],\n);\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "python-two-statements",
+      "split": "tune",
+      "reason": "Minimal genuine clone.",
+      "files": [
+        {
+          "path": "left.py",
+          "source": "def first(value):\n    next_value = value + 1\n    return next_value\n"
+        },
+        {
+          "path": "right.py",
+          "source": "def second(value):\n    next_value = value + 2\n    return next_value\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.py",
+            1,
+            3
+          ],
+          [
+            "right.py",
+            1,
+            3
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "python-docstring-wrapper",
+      "split": "tune",
+      "reason": "Docstrings do not count as executable statements.",
+      "files": [
+        {
+          "path": "left.py",
+          "source": "def first(value):\n    \"\"\"Explain the adapter.\"\"\"\n    return transform(value)\n"
+        },
+        {
+          "path": "right.py",
+          "source": "def second(value):\n    \"\"\"Explain the adapter.\"\"\"\n    return transform(value)\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "python-comment-wrapper",
+      "split": "holdout",
+      "reason": "Comments and continuation lines do not promote wrappers.",
+      "files": [
+        {
+          "path": "left.py",
+          "source": "def first(value):\n    # Explain the adapter.\n    return transform(\n        value,\n    )\n"
+        },
+        {
+          "path": "right.py",
+          "source": "def second(value):\n    # Explain the adapter.\n    return transform(\n        value,\n    )\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "python-async",
+      "split": "holdout",
+      "reason": "Async true-clone control.",
+      "files": [
+        {
+          "path": "left.py",
+          "source": "async def first(value):\n    result = await read(value)\n    return result\n"
+        },
+        {
+          "path": "right.py",
+          "source": "async def second(value):\n    result = await read(value)\n    return result\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.py",
+            1,
+            3
+          ],
+          [
+            "right.py",
+            1,
+            3
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "rs-positive",
+      "split": "holdout",
+      "reason": "Non-JavaScript clone recall control.",
+      "files": [
+        {
+          "path": "left.rs",
+          "source": "fn first(value: i32) -> i32 {\n    let next = value + 1;\n    next\n}\n"
+        },
+        {
+          "path": "right.rs",
+          "source": "fn second(value: i32) -> i32 {\n    let next = value + 2;\n    next\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.rs",
+            1,
+            4
+          ],
+          [
+            "right.rs",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "rs-wrapper",
+      "split": "holdout",
+      "reason": "Non-JavaScript one-statement wrapper control.",
+      "files": [
+        {
+          "path": "left.rs",
+          "source": "fn first(value: i32) -> i32 {\n    transform(\n        value,\n    )\n}\n"
+        },
+        {
+          "path": "right.rs",
+          "source": "fn second(value: i32) -> i32 {\n    transform(\n        value,\n    )\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "cpp-positive",
+      "split": "holdout",
+      "reason": "Non-JavaScript clone recall control.",
+      "files": [
+        {
+          "path": "left.cpp",
+          "source": "int first(int value) {\n    int next = value + 1;\n    return next;\n}\n"
+        },
+        {
+          "path": "right.cpp",
+          "source": "int second(int value) {\n    int next = value + 2;\n    return next;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.cpp",
+            1,
+            4
+          ],
+          [
+            "right.cpp",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "cpp-wrapper",
+      "split": "holdout",
+      "reason": "Non-JavaScript one-statement wrapper control.",
+      "files": [
+        {
+          "path": "left.cpp",
+          "source": "int first(int value) {\n    return transform(\n        value\n    );\n}\n"
+        },
+        {
+          "path": "right.cpp",
+          "source": "int second(int value) {\n    return transform(\n        value\n    );\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "zig-positive",
+      "split": "holdout",
+      "reason": "Non-JavaScript clone recall control.",
+      "files": [
+        {
+          "path": "left.zig",
+          "source": "fn first(value: i32) i32 {\n    const next = value + 1;\n    return next;\n}\n"
+        },
+        {
+          "path": "right.zig",
+          "source": "fn second(value: i32) i32 {\n    const next = value + 2;\n    return next;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.zig",
+            1,
+            4
+          ],
+          [
+            "right.zig",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "zig-wrapper",
+      "split": "holdout",
+      "reason": "Non-JavaScript one-statement wrapper control.",
+      "files": [
+        {
+          "path": "left.zig",
+          "source": "fn first(value: i32) i32 {\n    return transform(\n        value,\n    );\n}\n"
+        },
+        {
+          "path": "right.zig",
+          "source": "fn second(value: i32) i32 {\n    return transform(\n        value,\n    );\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "hs-positive",
+      "split": "holdout",
+      "reason": "Non-JavaScript clone recall control.",
+      "files": [
+        {
+          "path": "left.hs",
+          "source": "first value =\n  let next = value + 1\n      doubled = next * 2\n  in doubled\n"
+        },
+        {
+          "path": "right.hs",
+          "source": "second value =\n  let next = value + 2\n      doubled = next * 2\n  in doubled\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.hs",
+            1,
+            4
+          ],
+          [
+            "right.hs",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "hs-wrapper",
+      "split": "holdout",
+      "reason": "Non-JavaScript one-statement wrapper control.",
+      "files": [
+        {
+          "path": "left.hs",
+          "source": "first value =\n  transform\n    value\n"
+        },
+        {
+          "path": "right.hs",
+          "source": "second value =\n  transform\n    value\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-different-operator",
+      "split": "holdout",
+      "reason": "Structural normalization preserves operators.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "function first(value) {\n  const next = value + 1;\n  return next;\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "function second(value) {\n  const next = value - 2;\n  return next;\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-different-operator",
+      "split": "holdout",
+      "reason": "Structural normalization preserves operators.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function first(value) {\n  const next = value + 1;\n  return next;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function second(value) {\n  const next = value - 2;\n  return next;\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "py-different-operator",
+      "split": "holdout",
+      "reason": "Structural normalization preserves operators.",
+      "files": [
+        {
+          "path": "left.py",
+          "source": "def first(value):\n    next_value = value + 1\n    return next_value\n"
+        },
+        {
+          "path": "right.py",
+          "source": "def second(value):\n    next_value = value - 2\n    return next_value\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-method",
+      "split": "holdout",
+      "reason": "Methods keep genuine two-statement clones.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "class Example {\n  first(value) {\n    const next = value + 1;\n    return next;\n  }\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "class Example {\n  second(value) {\n    const next = value + 1;\n    return next;\n  }\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.js",
+            2,
+            5
+          ],
+          [
+            "right.js",
+            2,
+            5
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "js-branch",
+      "split": "holdout",
+      "reason": "Actual branch blocks with two statements remain detectable.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "if (first) {\n  prepare();\n  commit();\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "if (second) {\n  prepare();\n  commit();\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.js",
+            1,
+            4
+          ],
+          [
+            "right.js",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "js-single-per-arm",
+      "split": "holdout",
+      "reason": "Statements from separate branch arms are not pooled.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "if (first) {\n  prepare();\n} else {\n  commit();\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "if (second) {\n  prepare();\n} else {\n  commit();\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-sequence-arrow",
+      "split": "holdout",
+      "reason": "A sequence expression is not a statement block.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "const first = (value) => (\n  prepare(value),\n  commit(value)\n);\n"
+        },
+        {
+          "path": "right.js",
+          "source": "const second = (value) => (\n  prepare(value),\n  commit(value)\n);\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "js-nested-branch",
+      "split": "holdout",
+      "reason": "A nested single-statement branch does not suppress its parent clone.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "function first(value) {\n  if (value) {\n    prepare();\n  }\n  return value;\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "function second(value) {\n  if (value) {\n    prepare();\n  }\n  return value;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.js",
+            1,
+            6
+          ],
+          [
+            "right.js",
+            1,
+            6
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "js-loop",
+      "split": "holdout",
+      "reason": "Two-statement loop body recall control.",
+      "files": [
+        {
+          "path": "left.js",
+          "source": "for (const first of items) {\n  prepare(first);\n  commit(first);\n}\n"
+        },
+        {
+          "path": "right.js",
+          "source": "for (const second of items) {\n  prepare(second);\n  commit(second);\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.js",
+            1,
+            4
+          ],
+          [
+            "right.js",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-method",
+      "split": "holdout",
+      "reason": "Methods keep genuine two-statement clones.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "class Example {\n  first(value) {\n    const next = value + 1;\n    return next;\n  }\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "class Example {\n  second(value) {\n    const next = value + 1;\n    return next;\n  }\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            2,
+            5
+          ],
+          [
+            "right.ts",
+            2,
+            5
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-branch",
+      "split": "holdout",
+      "reason": "Actual branch blocks with two statements remain detectable.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "if (first) {\n  prepare();\n  commit();\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "if (second) {\n  prepare();\n  commit();\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-single-per-arm",
+      "split": "holdout",
+      "reason": "Statements from separate branch arms are not pooled.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "if (first) {\n  prepare();\n} else {\n  commit();\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "if (second) {\n  prepare();\n} else {\n  commit();\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-sequence-arrow",
+      "split": "holdout",
+      "reason": "A sequence expression is not a statement block.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "const first = (value) => (\n  prepare(value),\n  commit(value)\n);\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "const second = (value) => (\n  prepare(value),\n  commit(value)\n);\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "ts-nested-branch",
+      "split": "holdout",
+      "reason": "A nested single-statement branch does not suppress its parent clone.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function first(value) {\n  if (value) {\n    prepare();\n  }\n  return value;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function second(value) {\n  if (value) {\n    prepare();\n  }\n  return value;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            6
+          ],
+          [
+            "right.ts",
+            1,
+            6
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-loop",
+      "split": "holdout",
+      "reason": "Two-statement loop body recall control.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "for (const first of items) {\n  prepare(first);\n  commit(first);\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "for (const second of items) {\n  prepare(second);\n  commit(second);\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ts-independent-groups",
+      "split": "holdout",
+      "reason": "Operator-distinct clone families must remain two separate groups with exact spans.",
+      "files": [
+        {
+          "path": "first-add.ts",
+          "source": "function first(value) {\n  const next = value + 1;\n  return next;\n}\n"
+        },
+        {
+          "path": "second-add.ts",
+          "source": "function second(value) {\n  const next = value + 1;\n  return next;\n}\n"
+        },
+        {
+          "path": "first-subtract.ts",
+          "source": "function first(value) {\n  const next = value - 1;\n  return next;\n}\n"
+        },
+        {
+          "path": "second-subtract.ts",
+          "source": "function second(value) {\n  const next = value - 1;\n  return next;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "first-add.ts",
+            1,
+            4
+          ],
+          [
+            "second-add.ts",
+            1,
+            4
+          ]
+        ],
+        [
+          [
+            "first-subtract.ts",
+            1,
+            4
+          ],
+          [
+            "second-subtract.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "repository": "https://github.com/openclaw/openclaw",
+  "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+  "selector": "8 strata: src/{agents,gateway,auto-reply,infra}, extensions/{browser,codex,matrix,qa-lab}; tracked-present .ts/.js <=65536 bytes; each stratum first 3 production and 3 tests sorted by SHA256(UTF8(clone-eval-v1)+NUL+UTF8(relative_path)); test classifier \\.(test|spec)\\.; append 3 regression anchors, deduplicated",
+  "files": [
+    {
+      "path": "src/agents/video-generation-task-status.ts",
+      "sha256": "8b7fa8a0b2d0611a26bc3b006376178f9d6f0abc6b4207c110909149b54e004c",
+      "scope": "production"
+    },
+    {
+      "path": "src/agents/embedded-agent-runner/run/attempt-stream-prepare.ts",
+      "sha256": "bfb34292d5a4f640a1d85643d84ed719c5612efdd92205dfb29437f818dc7ea9",
+      "scope": "production"
+    },
+    {
+      "path": "src/agents/subagent-registry-restart-recovery-coordinator.ts",
+      "sha256": "0c20472854af52833925b56b025a560c0f204bdea541062ca341f2502310f908",
+      "scope": "production"
+    },
+    {
+      "path": "src/agents/cli-runner.before-agent-reply-cron.test.ts",
+      "sha256": "6381b3964261373a92df6af882c2014f721f191de2585ebe68d409dd4a6f149b",
+      "scope": "tests"
+    },
+    {
+      "path": "src/agents/subagent-registry-restart-recovery.test.ts",
+      "sha256": "147621f3982264c135cde0ce7542e8a4b9ce7380592d3ca6e14d29b9aae12b9b",
+      "scope": "tests"
+    },
+    {
+      "path": "src/agents/worktrees/service.orphans.test.ts",
+      "sha256": "a7420cd48a428687ece33fd6f643c42453b1c573841f621ef44f273ae8ac1079",
+      "scope": "tests"
+    },
+    {
+      "path": "src/gateway/talk-session-registry.ts",
+      "sha256": "68ba113d273a6b47bc8d2f3c16eedb6e52a8955ff1b9c58971199ef138f99232",
+      "scope": "production"
+    },
+    {
+      "path": "src/gateway/server-methods/system-agent.ts",
+      "sha256": "c0420ebd93eb530ce9d3d72bca051a42af24acca571a352a137fd8d7926aa843",
+      "scope": "production"
+    },
+    {
+      "path": "src/gateway/session-create-fork-entry.ts",
+      "sha256": "f5c95360b89c1402eeda535d55c39a5a174e8f9305a67ba5058504100074726d",
+      "scope": "production"
+    },
+    {
+      "path": "src/gateway/managed-outgoing-gc-availability.test.ts",
+      "sha256": "6166089770ac1ff8cf3698f9686ffb444504aca3ed055a5fb9188394a8460a04",
+      "scope": "tests"
+    },
+    {
+      "path": "src/gateway/server-methods/system-agent-reset-boundary.test.ts",
+      "sha256": "e47f51a5eca28e36e141fc4d554a4a48fbb1de94aba7acd472066c64a15a9080",
+      "scope": "tests"
+    },
+    {
+      "path": "src/gateway/session-create-fork-entry.test.ts",
+      "sha256": "63ae655bcd61536e713601fdf9d0b200cd6e86ea388d1f0aa4d5dcfb879b8526",
+      "scope": "tests"
+    },
+    {
+      "path": "src/auto-reply/reply/dispatch-from-config.choose-route.ts",
+      "sha256": "6d4c1e0162a122c2e75ebbec5f9f09828c06b19d4288f5d93481c142a6bfad67",
+      "scope": "production"
+    },
+    {
+      "path": "src/auto-reply/reply/prompt-prelude.ts",
+      "sha256": "7cc1b95c37fc54cdb1676ff5db9bb1f801cbb927f03f3ad03200727e1c090da7",
+      "scope": "production"
+    },
+    {
+      "path": "src/auto-reply/reply/dispatch-from-config.finalize.ts",
+      "sha256": "ec7825d55a4d6e68eab2b274da45d95ee596222a8ebb7b6f011fe67666d15d2e",
+      "scope": "production"
+    },
+    {
+      "path": "src/auto-reply/reply/reply-run-registry.test.ts",
+      "sha256": "18689ffe6bad3d257388fc0651ee57e1f4fa6e61f19ea891cc8c1551d028b2ba",
+      "scope": "tests"
+    },
+    {
+      "path": "src/auto-reply/reply/restart-recovery-claim.test.ts",
+      "sha256": "72f657c56e3e031177272747c8e5cd3be2f4b1b7731d188e8ef0ff96bfd29d6a",
+      "scope": "tests"
+    },
+    {
+      "path": "src/auto-reply/reply/dispatch-from-config.pending-final.test.ts",
+      "sha256": "049dc08d56e6be4debf7869029e632516700bd6a99c0383796bd08b1b37d4d5e",
+      "scope": "tests"
+    },
+    {
+      "path": "src/infra/backup-create.ts",
+      "sha256": "8e4b264367a2a36f793c457c2561c45a87707ea012f624b0099c1e30e140d311",
+      "scope": "production"
+    },
+    {
+      "path": "src/infra/heartbeat-runner-delivery.ts",
+      "sha256": "22f64b18779df3eb1a97128c655006e246aeecadaccbb6651a05015e907a8075",
+      "scope": "production"
+    },
+    {
+      "path": "src/infra/backup-volatile-filter.ts",
+      "sha256": "7dafa64a8875f55806e38d6874b5f8568b98300598c0a5ea7ecac9ba4ce45056",
+      "scope": "production"
+    },
+    {
+      "path": "src/infra/device-bootstrap.test.ts",
+      "sha256": "afc3ea8a15db587cf2de62f5eabbfc2ce7f4c9e590cf6bea4c24b1b1f27d0e1d",
+      "scope": "tests"
+    },
+    {
+      "path": "src/infra/clawhub-skill-security.test.ts",
+      "sha256": "8fdd2930c10a9183e1579adfc3c2c0fb13030c7017f809d020f969fb329412f3",
+      "scope": "tests"
+    },
+    {
+      "path": "src/infra/backup-volatile-filter.test.ts",
+      "sha256": "4258ccae91ba55d7d78c62c5fabe276a04547d212daaf42ede49626d30c84f43",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/browser/src/browser-tool.ts",
+      "sha256": "7917bda82536945aac0019f3f687568817b424d8c6e50dedf3e444eac1c6e0d0",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/browser/src/browser/client-actions-core.ts",
+      "sha256": "ab8230fe3b4cda53da6b7a73d558da2ed4ce3197832c9d319efe00efdcfc6e5e",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/browser/src/browser/pw-session-state.ts",
+      "sha256": "6e934cba574a282f843b6513d52cb3bf3416b4b77ae29ceed7bfbde0735c2e70",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/browser/chrome-extension/background.test.ts",
+      "sha256": "431ec7aa69b2e72dad5b0d2793778bef6e08462376cb698a6ba511c224dff118",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/browser/src/browser/pw-tools-core.snapshot.navigate-guard.test.ts",
+      "sha256": "94c46c2ea3a0303bd7c9e481e7d5fca1b68cbdfac1c374fff84ea32adc719711",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/browser/src/browser/pw-session-state.emulation.test.ts",
+      "sha256": "d697a3f92cd92419b96904d065c8d933abda5fda2b353431a74e2d8500f71ef9",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/codex/src/app-server/elicitation-bridge.ts",
+      "sha256": "f8630bb1a13cd7535d3ad4ac51eb1f25d8eaf93796bfa20f3965e4fb605355e4",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/codex/src/app-server/version.ts",
+      "sha256": "e045e2eb8be8f111392b8424b20a710e87770aca9135aee037d9db75448eb233",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+      "sha256": "0225bc5c359636f97325a8aa1912b13822b84b33e26dd9d581b1fbda129aa432",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/codex/src/app-server/attempt-steering.test.ts",
+      "sha256": "7af36f1d35c70b55db818e71f7a6bcd55d9e63c6deb10cf4ad48db12f6b0a19b",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/codex/src/web-search-provider.test.ts",
+      "sha256": "6aa67f3a296e299570893f2e4b85594f2c4332c90a3d11f8d9e02808750a9d35",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/codex/src/app-server/models.test.ts",
+      "sha256": "72e320c8680c642271c5ce4b24c8bdf9102db3eeebcf1bb2f625c2c4431671b5",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/matrix/src/matrix/client-bootstrap.ts",
+      "sha256": "5a79bb0d4afb70cf1b2e8f2f71bfb56067f74e5caf1da66b820d28cdfe09f8eb",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/matrix/src/matrix/sdk/decrypt-bridge.ts",
+      "sha256": "9f58532aaeacb256c4515dda88e3468d48763d148815624ad70374ba8943279f",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/matrix/src/matrix/client.ts",
+      "sha256": "b67ca9ba23b993b0152d874fe7bf30f0d6f6d9a09a103a1284b6cb61e67c30e4",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/matrix/src/matrix/monitor/index.test.ts",
+      "sha256": "8a4ae99a9db3a929a984d20ccbf5072a4d56e6db0c9a42088056ca07ce870e75",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/matrix/src/matrix/client/file-sync-store.test.ts",
+      "sha256": "b7f760956a6335767e46e680f0137c1b13d12379535b05a6711eaffe66cc9d63",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/matrix/src/matrix/client-bootstrap.test.ts",
+      "sha256": "8c6e3c2fcdbe346f0f0b763c24ee7b188a75a593b87f07f3b9df0b28ea4b803d",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/qa-lab/src/scenario-lane.ts",
+      "sha256": "8181965ffb95863417438b99fae45282c791c4593628942c8b470c82477f2c2d",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/qa-lab/src/suite-support.ts",
+      "sha256": "0eb66710cd125cc2c513ea52aec759f78a9a97007fe58883e791fd5feca7957a",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/qa-lab/src/qa-channel-transport.ts",
+      "sha256": "7ef1ee29d317550ce80b852c6540fdccc9461042f99fadff6c16b69d056c5c44",
+      "scope": "production"
+    },
+    {
+      "path": "extensions/qa-lab/src/scenario-runtime-api.test.ts",
+      "sha256": "a3861c15e181d7d7042a533c67659ac274b82f0c1078f902598b32269a5be8f8",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/qa-lab/src/character-eval.test.ts",
+      "sha256": "21afd4e03a677bbea1b3da045c84739f8eeaa81d6943ebc8f87bea2fd94ea3cb",
+      "scope": "tests"
+    },
+    {
+      "path": "extensions/qa-lab/src/bus-state.test.ts",
+      "sha256": "8f804634007df7ef010b03255cfccbbe5c969ebe6f0cbbc9274ef3c5c3fba29a",
+      "scope": "tests"
+    },
+    {
+      "path": "src/infra/diagnostic-trace-propagation.ts",
+      "sha256": "2db8b0c1e7de42056d38332b5bf1ca0792bed520d19e3523910964e65df43bea",
+      "scope": "regression-anchor"
+    },
+    {
+      "path": "src/shared/device-bootstrap-profile.ts",
+      "sha256": "14fbb199f90af79603edb2d00b385d6aaefefda932170808fc1a380e38e14e6e",
+      "scope": "regression-anchor"
+    }
+  ]
+}
