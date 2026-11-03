@@ -58,8 +58,8 @@ file or rewriting application code to satisfy a grammar.
 ## Recorded comparison
 
 [`results.json`](results.json) compares the published `0.2.0` clone analyzer,
-upstream main `a8618228939def726c2ec48b354693e5aa1999d5`, and this fork's
-`0.2.0+vk.1` analyzer, with the same frozen parser dependencies and evaluation
+upstream main `a8618228939def726c2ec48b354693e5aa1999d5`, and the
+`0.2.0+vk.1` fork analyzer, with the same frozen parser dependencies and evaluation
 runner. Only the clone analyzer was substituted for the historical comparisons;
 these are not full historical package benchmarks. The file records analyzer,
 suite, dependency-lock, manifest, and parsed-symbol hashes.
@@ -70,8 +70,8 @@ suite, dependency-lock, manifest, and parsed-symbol hashes.
 | Upstream `a861822` | 42/54 | 24 | 0 | 403 |
 | Fork `0.2.0+vk.1` | 54/54 | 0 | 0 | 250 |
 
-All three use the same 47 parsed files, 12,843 `SLOC`, and parsed-symbol digest.
-Three existing TypeScript grammar failures remain visible:
+Those historical measurements use the same 47 parsed files, 12,843 `SLOC`, and
+parsed-symbol digest. Their frozen TypeScript grammar failed on:
 
 - `src/agents/cli-runner.before-agent-reply-cron.test.ts`
 - `src/infra/backup-create.ts`
@@ -81,3 +81,23 @@ Zero false positives here means zero against these labels. The corpus score
 drop does not establish that every remaining clone is actionable. Engine
 versions belong to separate scan baselines; do not interpret their score delta
 as a source-code improvement.
+
+## Native grammar coverage baseline
+
+[`grammar_results.json`](grammar_results.json) records `0.2.0+vk.2` with the
+native Git-pinned grammar fork, the exact dependency-lock hash, and the same
+unchanged labelled suite and corpus manifest. All 54 cases pass with zero
+labelled false positives or negatives. All 50 requested files parse: 14,845
+`SLOC`, 282 clone `SLOC` and 23 clone groups.
+
+On the original 47-file overlap, the function-symbol digest, 12,843 `SLOC`, 250
+clone `SLOC` and 19 groups match the historical `vk.1` result. The full 50-file
+values add previously unparsed source; this is a new coverage baseline, not
+an application-code improvement or a measured precision gain.
+
+The native regression set covers type-only wildcard exports, import member
+type arguments, arrays, indexed/parenthesized types, invalid forms and ordinary
+expression controls in TS and TSX. The scanner still supports `.ts`, not `.tsx`.
+Generic-await AST ownership remains an inherited limitation, recorded explicitly
+as expected-failure tests and separate from passing syntax controls. No source
+preprocessing or metric-weight changes are used.

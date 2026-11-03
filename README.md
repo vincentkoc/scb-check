@@ -17,29 +17,30 @@ Requires Python 3.12+.
 Run without installing (recommended):
 
 ```bash
-uvx scb-check check PATH
-uvx --from git+https://github.com/gabeorlanski/scb-check scb-check check PATH
+uvx --from git+https://github.com/vincentkoc/scb-check scb-check check PATH
 ```
 
-Or install into the current project:
+For reproducible use, append `@FULL_COMMIT_SHA` to the Git URL. Published
+`scb-check` packages use the upstream engine. Or install into the current project:
 
 ```bash
 uv sync              # for development in this repo
-uv add scb-check     # as a dependency elsewhere
+uv add "scb-check @ git+https://github.com/vincentkoc/scb-check"
 ```
 
-For hash-checked dependency installs from this repository, use the exported lock files:
+For source-pinned dependency installs from this repository, use the exported files.
+The uv lock retains registry hashes; pip cannot hash the Git grammar requirement:
 
 ```bash
-python -m pip install --require-hashes -r requirements.lock
-python -m pip install --require-hashes -r requirements-dev.lock
+python -m pip install -r requirements.lock
+python -m pip install -r requirements-dev.lock
 ```
 
 Regenerate them after dependency changes with:
 
 ```bash
-uv export --format requirements.txt --no-dev --no-emit-project --frozen --output-file requirements.lock
-uv export --format requirements.txt --all-groups --no-emit-project --frozen --output-file requirements-dev.lock
+uv export --format requirements.txt --no-dev --no-emit-project --frozen --no-hashes --output-file requirements.lock
+uv export --format requirements.txt --all-groups --no-emit-project --frozen --no-hashes --output-file requirements-dev.lock
 ```
 
 `scb-check` runs bundled ast-grep rules by trying a global `sg` executable first. If global `sg` is missing or fails, it falls back to the `ast-grep-cli` executable installed with `scb-check`.
@@ -73,7 +74,11 @@ scb-check rule RULE_ID                  # print YAML or metadata for a specific 
 
 Clone detection only emits duplicated syntax blocks spanning at least three `SLOC` with at least two executable statements in one statement body. Function signatures, comments, blanks, Python docstrings, and expression operands do not satisfy the statement threshold. Expression-bodied arrows are excluded. Displayed clone line counts and `--min-duplicate-lines` still use duplicated `SLOC` in the clone span.
 
-This fork identifies that scoring policy as `statement-bodies-v1` in its [clone quality evaluation](evals/README.md) and uses version `0.2.0+vk.1`. Treat scores from other engine versions as separate baselines.
+This fork identifies that scoring policy as `statement-bodies-v1` in its [clone quality evaluation](evals/README.md) and uses version `0.2.0+vk.2`. Treat scores from other engine versions as separate baselines. The TypeScript grammar is an exact Git-pinned
+[fork](https://github.com/vincentkoc/tree-sitter-typescript) built from checked-in
+C sources. Installation requires a C compiler and Python development headers;
+Node.js is required only for grammar regeneration. This is a source release,
+not a PyPI release.
 
 ## Configuration
 
