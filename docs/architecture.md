@@ -77,6 +77,12 @@ CLI (`cli.py` / `commands/`)
 `clone finding`
 : Duplicate syntax block found by hashing normalized tree-sitter subtrees. Candidates must span at least three `SLOC` and contain at least two executable statements in one language-configured statement body. Signatures, comments, blanks, Python docstrings, and expression operands do not satisfy the statement threshold. Statements from separate branch arms are not pooled. See the [versioned clone evaluation](../evals/README.md).
 
+JavaScript/TypeScript clone normalization retains template-substitution structure
+and the surrounding identifier map. Static text and ordinary data normalize,
+including inside substitutions. A template without substitutions is string data.
+Regex literal normalization is unchanged. This is structural matching, not
+semantic equivalence or a recommendation to extract every reported clone.
+
 `structural rule`
 : Python class in `rules/` that checks typed IR subjects and returns `RuleFinding | None`.
 

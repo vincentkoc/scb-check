@@ -21,7 +21,7 @@ Keep these docs up to date. When behavior, scoring, CLI contracts, source direct
 
 ## TypeScript dependency
 
-The native grammar is Git-pinned for `0.2.0+vk.3`; keep its exact revision in
+The native grammar is Git-pinned for `0.2.0+vk.4`; keep its exact revision in
 `pyproject.toml`, `uv.lock` and requirements exports synchronized. Syntax support
 and known AST ownership gaps are qualified separately. Use a new measurement
 baseline after engine or grammar changes.

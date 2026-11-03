@@ -2,7 +2,15 @@
 
 All notable user-facing changes to `scb-check` are documented here.
 
-## Unreleased
+## [0.2.0+vk.4] - 2026-11-03
+
+### Fixed
+
+- Preserve JavaScript/TypeScript template substitutions when matching clones:
+  operators, call structure, order and identifier relationships remain significant.
+  Static template text and ordinary data still normalize; regex matching is unchanged.
+- Establish a new engine baseline for the changed structural hashes. Clone body
+  thresholds, complexity metrics and the native grammar pin remain unchanged.
 
 ### Added
 

@@ -20,6 +20,9 @@ These drive the verbosity/erosion numbers — change with care:
 - `CLONE_NODE_TYPES` in [`clones.py`](clones.py) and language clone configs under [`../tree_walking/languages/`](../tree_walking/languages/) — which block types get hashed.
 - `_hash_ast_subtree` / `_normalize_ast` — identifier and literal normalization.
 - Clone policy `statement-bodies-v1` requires three `SLOC` and two executable statements in one configured body container. Never count expression operands through an arbitrary `body` field. Run the labelled suite under `evals/` when changing this policy; preserve positive controls across languages.
+- `template-structure-v1` preserves ordered JS/TS template substitutions using the
+  enclosing identifier map. Static text and substitution-free templates remain
+  ordinary string data. Regex literals retain their existing normalization.
 
 ## ast-grep boundary
 

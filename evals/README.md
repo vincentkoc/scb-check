@@ -166,8 +166,8 @@ corpus parsing exit `2`. External source bytes must match the pinned manifest.
 The runner never downloads source. Without `--checkout`, it evaluates labels
 only. CI runs that mode; recorded corpus results require the external bytes.
 
-[`normalization_results.json`](normalization_results.json) records the exact
-analyzer, evaluator, lock, suites and manifest identities with Python 3.13.13 and
+[`normalization_results.json`](normalization_results.json) records the `vk.3`
+experiment's exact analyzer, evaluator, lock, suites and manifest identities with Python 3.13.13 and
 the pinned native grammar. All variants parse all 50 files, retain 14,845 `SLOC`
 and the same function-symbol digest. Clone groups are compared by member spans,
 independently of changed structural hashes.
@@ -185,10 +185,27 @@ positives or negatives on these 16 cases. Making every literal exact loses 22
 labelled spans in the existing suite and 12 in the source-derived suite. A lower
 corpus clone count alone would therefore select an overstrict detector.
 
-No production change is promoted by this experiment. Template-expression
-structure is the narrower follow-up: it preserves operators and binding order
-that the baseline currently discards. Regex matching needs a deliberate policy
+The `vk.3` experiment did not itself change production. Template-expression
+structure is promoted separately in `vk.4`: it preserves operators and binding order
+that the `vk.3` baseline discarded. Regex matching still needs a deliberate policy
 decision: its two removed corpus groups include both short domain predicates and
 the potentially useful shared relay-extraction algorithm. The additional group
 removed by template matching is a test callback that logs a dynamic event ID
 versus a constant message. None of these deltas measures application improvement.
+
+## Production template baseline
+
+`0.2.0+vk.4` combines the existing `statement-bodies-v1` body selection with
+`template-structure-v1` normalization. Ordered substitutions share the enclosing
+identifier map; comments and ordinary data normalize, including static template
+text. Plain templates retain ordinary string matching. Regex matching stays as
+in `vk.3`; the three regex-policy differences in the frozen source suite remain
+explicit rather than relabelled.
+
+[`template_results.json`](template_results.json) records the new production
+identity separately from the immutable `vk.3` experiment. Use a new scan baseline;
+changed structural hashes and clone counts do not imply improved application code.
+The production run retains all 60 existing cases and matches 13 of the 16
+source-derived labels. All 50 corpus files parse with unchanged SLOC and function
+symbols; clone SLOC is 276 across 22 groups, matching the qualified template-only
+experiment.

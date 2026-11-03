@@ -335,6 +335,11 @@ def _normalize_node(
 ) -> str:
     if node.type in context.identifier_node_types:
         return _normalized_identifier(node, variable_map)
+    if node.type == "template_string" and context.language in {
+        Language.JAVASCRIPT,
+        Language.TYPESCRIPT,
+    }:
+        return _normalize_template(node, context, variable_map)
     if node.type in context.literal_node_types:
         return _literal_token(node.type, context.language)
     if node.type == "operator" and node.text is not None:
@@ -348,6 +353,25 @@ def _normalize_node(
         _normalize_node(child, context, variable_map) for child in children
     ]
     return f"{node.type}({','.join(normalized_children)})"
+
+
+def _normalize_template(
+    node: Node,
+    context: _NormalizeContext,
+    variable_map: dict[str, str],
+) -> str:
+    substitutions = tuple(
+        child
+        for child in node.named_children
+        if child.type == "template_substitution"
+    )
+    if not substitutions:
+        return _literal_token(node.type, context.language)
+    # Static text is data; executable substitutions share the enclosing names.
+    normalized = (
+        _normalize_node(child, context, variable_map) for child in substitutions
+    )
+    return f"template_string({','.join(normalized)})"
 
 
 def _normalized_identifier(node: Node, variable_map: dict[str, str]) -> str:
