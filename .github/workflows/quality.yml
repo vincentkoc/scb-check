@@ -23,4 +23,5 @@ jobs:
       - run: uv run ty check .
       - run: uv run pytest
       - run: uv run python -m evals.clone_eval
+      - run: uv run python -m evals.normalization_eval
       - run: uv run vulture

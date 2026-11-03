@@ -145,3 +145,50 @@ shared extraction helper may be worthwhile. A candidate-policy match rate is
 not a measure of actionable-refactoring precision. The corpus and families were
 selected after inspecting existing findings, so this is a correlated regression
 experiment, not blind validation or an estimate for arbitrary software.
+
+Labels were independently reviewed and frozen in signed commit
+[`4fda778`](https://github.com/vincentkoc/scb-check/commit/4fda77870a3c25a87daf391736b18039cbce128c)
+before candidate implementation or detector runs. The experiment additionally
+tests plain templates versus quoted strings and the presence of static template
+text; those implementation regressions do not enlarge the frozen 16-case suite.
+
+```sh
+uv run python -m evals.normalization_eval
+uv run python -m evals.normalization_eval --checkout /path/to/openclaw
+uv run pytest tests/analysis/test_normalization_eval.py
+```
+
+The runner temporarily replaces the normalizer in its own process, restores it
+after normal/error paths, and runs variants serially. It never changes installed
+package files or the production CLI. Candidate-label mismatches are reported as
+data, so a completed comparison exits `0`; source/manifest errors and partial
+corpus parsing exit `2`. External source bytes must match the pinned manifest.
+The runner never downloads source. Without `--checkout`, it evaluates labels
+only. CI runs that mode; recorded corpus results require the external bytes.
+
+[`normalization_results.json`](normalization_results.json) records the exact
+analyzer, evaluator, lock, suites and manifest identities with Python 3.13.13 and
+the pinned native grammar. All variants parse all 50 files, retain 14,845 `SLOC`
+and the same function-symbol digest. Clone groups are compared by member spans,
+independently of changed structural hashes.
+
+| Experimental normalizer | Existing cases | Candidate-policy cases | Corpus clone SLOC / groups |
+| --- | ---: | ---: | ---: |
+| Production baseline | 60/60 | 11/16 | 282 / 23 |
+| Exact regex source | 60/60 | 14/16 | 264 / 21 |
+| Template expression structure | 60/60 | 13/16 | 276 / 22 |
+| Both executable-literal rules | 60/60 | 16/16 | 258 / 20 |
+| Every literal exact | 49/60 | 10/16 | 108 / 14 |
+
+The combined rule has 18 matching labelled spans and no candidate-policy false
+positives or negatives on these 16 cases. Making every literal exact loses 22
+labelled spans in the existing suite and 12 in the source-derived suite. A lower
+corpus clone count alone would therefore select an overstrict detector.
+
+No production change is promoted by this experiment. Template-expression
+structure is the narrower follow-up: it preserves operators and binding order
+that the baseline currently discards. Regex matching needs a deliberate policy
+decision: its two removed corpus groups include both short domain predicates and
+the potentially useful shared relay-extraction algorithm. The additional group
+removed by template matching is a test callback that logs a dynamic event ID
+versus a constant message. None of these deltas measures application improvement.

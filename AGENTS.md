@@ -26,6 +26,15 @@ The native grammar is Git-pinned for `0.2.0+vk.3`; keep its exact revision in
 and known AST ownership gaps are qualified separately. Use a new measurement
 baseline after engine or grammar changes.
 
+## Normalization experiments
+
+`evals/normalization_eval.py` compares process-local candidate normalizers without
+changing production analysis. Keep source-derived labels frozen before detector
+runs, preserve source-family splits, and distinguish candidate-policy matches
+from refactoring usefulness. Run `uv run python -m evals.normalization_eval` after
+changing the experiment; it reports mismatches as data and rejects partial corpus
+coverage. Its private hook is serial and must always be restored.
+
 ## Workflow (every change)
 
 1. Write **behavioral** tests — assert observable behavior, not rendering strings or call order.

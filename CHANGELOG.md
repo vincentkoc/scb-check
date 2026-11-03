@@ -2,6 +2,17 @@
 
 All notable user-facing changes to `scb-check` are documented here.
 
+## Unreleased
+
+### Added
+
+- A separately labelled, source-derived 16-case normalization experiment with
+  family-isolated tune/holdout splits, pinned provenance and refactoring-usefulness
+  notes. The existing 60-case suite and production normalization stay unchanged.
+- Reproducible regex/template ablations and an exact-literal control, including
+  full-corpus coverage and changed clone membership. Experiments run only in
+  the evaluation process and restore the engine after errors.
+
 ## [0.2.0+vk.3] - 2026-11-03
 
 ### Fixed
