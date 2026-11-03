@@ -120,3 +120,28 @@ groups, group spans and structural hashes match the previous coverage baseline.
 The native compiler-reference suite improves valid AST matches from 45 to 92
 of 100 vectors per dialect; eight valid gaps and one invalid-syntax gap remain
 explicitly recorded there. Passing clone labels do not imply complete parser coverage.
+
+## Source-derived normalization experiment
+
+`source_derived_cases.json` freezes 16 additional cases before running candidate
+normalizers: eight tune cases from the elicitation and matrix-cache families,
+and eight holdout cases from the relay-extraction and wizard-guard families.
+Every derivative stays with its source family. Four cases are exact source
+excerpts; the others are explicitly described transformations. File hashes,
+revision and original spans refer to the existing public corpus. The derived
+excerpts retain the [OpenClaw MIT notice](LICENSE.openclaw).
+
+The candidate label policy preserves regex source (including flags) and template
+substitution structure, while normalizing ordinary data and consistent names.
+It retains the three-`SLOC`, two-statement minimum. These labels describe this
+proposed structural match rule, not the current production policy. Static
+template text and numeric/string data inside substitutions remain normalized.
+Regex-equivalent spellings and flag-order equivalence are outside this rule;
+`new RegExp` strings and tagged-template DSL semantics are not interpreted.
+
+Each case separately records refactoring usefulness. In particular, stricter
+regex matching separates the relay-ID and generation extractors even though a
+shared extraction helper may be worthwhile. A candidate-policy match rate is
+not a measure of actionable-refactoring precision. The corpus and families were
+selected after inspecting existing findings, so this is a correlated regression
+experiment, not blind validation or an estimate for arbitrary software.
