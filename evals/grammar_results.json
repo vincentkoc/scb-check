@@ -1,0 +1,380 @@
+{
+  "schema": 1,
+  "kind": "native-typescript-coverage",
+  "engine": "0.2.0+vk.2",
+  "python": "3.13.13",
+  "grammar": {
+    "version": "0.23.2+vk.1",
+    "url": "https://github.com/vincentkoc/tree-sitter-typescript",
+    "vcs_info": {
+      "vcs": "git",
+      "commit_id": "11b6b729d31a9161a04abdbd0904de0780003b50",
+      "requested_revision": "11b6b729d31a9161a04abdbd0904de0780003b50"
+    }
+  },
+  "dependency_lock_sha256": "ac9f0065d5a8ab8bf9863550cf8f008417abc596d77b8754c44056593a9fdf50",
+  "analyzer_sha256": "b6ff40a5fff76ddd8169684eea765f0ab5f0581db73d1ae5017ae4a0c4ec42f7",
+  "evaluator_sha256": "1bbb51fd392639cc81f13126d724f3439d0e886652691ab23d13526a313298ca",
+  "labelled": {
+    "engine": "0.2.0+vk.2",
+    "policy": "statement-bodies-v1",
+    "suite_sha256": "3209d49cfb9f36137710e2764006a4594d56cb5967b391865c658f1db2b1ee55",
+    "splits": {
+      "holdout": {
+        "cases": 38,
+        "passed": 38,
+        "tp": 42,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "tune": {
+        "cases": 16,
+        "passed": 16,
+        "tp": 6,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      }
+    },
+    "failures": []
+  },
+  "corpus": {
+    "engine": "0.2.0+vk.2",
+    "repository": "https://github.com/openclaw/openclaw",
+    "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+    "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+    "requested_files": 50,
+    "files": 50,
+    "parse_failures": [],
+    "sloc": 14845,
+    "symbol_sha256": "4a5f9e00c2274218801a151e5d323d7c93d9e8d2610a0b6d94b110a4d411c7b4",
+    "clone_sloc": 282,
+    "clone_groups": 23,
+    "clones": [
+      {
+        "path": "src/agents/worktrees/service.orphans.test.ts",
+        "start": 83,
+        "end": 88,
+        "group": "04e1d10efe60"
+      },
+      {
+        "path": "src/agents/worktrees/service.orphans.test.ts",
+        "start": 90,
+        "end": 95,
+        "group": "04e1d10efe60"
+      },
+      {
+        "path": "src/gateway/server-methods/system-agent.ts",
+        "start": 340,
+        "end": 343,
+        "group": "0bf882c71cf3"
+      },
+      {
+        "path": "src/gateway/server-methods/system-agent.ts",
+        "start": 394,
+        "end": 397,
+        "group": "0bf882c71cf3"
+      },
+      {
+        "path": "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+        "start": 600,
+        "end": 607,
+        "group": "182d09ef67f1"
+      },
+      {
+        "path": "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+        "start": 609,
+        "end": 616,
+        "group": "182d09ef67f1"
+      },
+      {
+        "path": "extensions/matrix/src/matrix/sdk/decrypt-bridge.ts",
+        "start": 461,
+        "end": 467,
+        "group": "1defc3600ee4"
+      },
+      {
+        "path": "extensions/matrix/src/matrix/sdk/decrypt-bridge.ts",
+        "start": 487,
+        "end": 493,
+        "group": "1defc3600ee4"
+      },
+      {
+        "path": "extensions/browser/chrome-extension/background.test.ts",
+        "start": 242,
+        "end": 245,
+        "group": "24b7fd5ce8a7"
+      },
+      {
+        "path": "extensions/browser/chrome-extension/background.test.ts",
+        "start": 338,
+        "end": 341,
+        "group": "24b7fd5ce8a7"
+      },
+      {
+        "path": "extensions/browser/chrome-extension/background.test.ts",
+        "start": 427,
+        "end": 430,
+        "group": "24b7fd5ce8a7"
+      },
+      {
+        "path": "extensions/browser/chrome-extension/background.test.ts",
+        "start": 432,
+        "end": 435,
+        "group": "24b7fd5ce8a7"
+      },
+      {
+        "path": "extensions/matrix/src/matrix/monitor/index.test.ts",
+        "start": 601,
+        "end": 604,
+        "group": "3752d11644f5"
+      },
+      {
+        "path": "extensions/matrix/src/matrix/monitor/index.test.ts",
+        "start": 661,
+        "end": 664,
+        "group": "3752d11644f5"
+      },
+      {
+        "path": "extensions/qa-lab/src/character-eval.test.ts",
+        "start": 152,
+        "end": 158,
+        "group": "4d1dff1385f2"
+      },
+      {
+        "path": "extensions/qa-lab/src/character-eval.test.ts",
+        "start": 160,
+        "end": 166,
+        "group": "4d1dff1385f2"
+      },
+      {
+        "path": "src/agents/worktrees/service.orphans.test.ts",
+        "start": 97,
+        "end": 102,
+        "group": "4f074c1ecebe"
+      },
+      {
+        "path": "src/agents/worktrees/service.orphans.test.ts",
+        "start": 104,
+        "end": 109,
+        "group": "4f074c1ecebe"
+      },
+      {
+        "path": "extensions/matrix/src/matrix/sdk/decrypt-bridge.ts",
+        "start": 166,
+        "end": 169,
+        "group": "537bfb5bf568"
+      },
+      {
+        "path": "extensions/matrix/src/matrix/sdk/decrypt-bridge.ts",
+        "start": 216,
+        "end": 219,
+        "group": "537bfb5bf568"
+      },
+      {
+        "path": "src/agents/cli-runner.before-agent-reply-cron.test.ts",
+        "start": 1012,
+        "end": 1015,
+        "group": "6c1c7149fe2b"
+      },
+      {
+        "path": "src/agents/cli-runner.before-agent-reply-cron.test.ts",
+        "start": 1028,
+        "end": 1031,
+        "group": "6c1c7149fe2b"
+      },
+      {
+        "path": "src/gateway/server-methods/system-agent.ts",
+        "start": 533,
+        "end": 540,
+        "group": "801b47db2b15"
+      },
+      {
+        "path": "src/gateway/server-methods/system-agent.ts",
+        "start": 710,
+        "end": 717,
+        "group": "801b47db2b15"
+      },
+      {
+        "path": "extensions/matrix/src/matrix/monitor/index.test.ts",
+        "start": 381,
+        "end": 385,
+        "group": "8493d4ebd8e6"
+      },
+      {
+        "path": "extensions/matrix/src/matrix/monitor/index.test.ts",
+        "start": 413,
+        "end": 417,
+        "group": "8493d4ebd8e6"
+      },
+      {
+        "path": "src/agents/subagent-registry-restart-recovery.test.ts",
+        "start": 70,
+        "end": 73,
+        "group": "8e4f28410836"
+      },
+      {
+        "path": "src/agents/subagent-registry-restart-recovery.test.ts",
+        "start": 215,
+        "end": 218,
+        "group": "8e4f28410836"
+      },
+      {
+        "path": "extensions/browser/chrome-extension/background.test.ts",
+        "start": 459,
+        "end": 465,
+        "group": "8e5a2bba1cf7"
+      },
+      {
+        "path": "extensions/browser/chrome-extension/background.test.ts",
+        "start": 487,
+        "end": 493,
+        "group": "8e5a2bba1cf7"
+      },
+      {
+        "path": "extensions/qa-lab/src/character-eval.test.ts",
+        "start": 536,
+        "end": 562,
+        "group": "9587174a65da"
+      },
+      {
+        "path": "extensions/qa-lab/src/character-eval.test.ts",
+        "start": 623,
+        "end": 648,
+        "group": "9587174a65da"
+      },
+      {
+        "path": "extensions/qa-lab/src/character-eval.test.ts",
+        "start": 650,
+        "end": 676,
+        "group": "9587174a65da"
+      },
+      {
+        "path": "extensions/qa-lab/src/character-eval.test.ts",
+        "start": 678,
+        "end": 704,
+        "group": "9587174a65da"
+      },
+      {
+        "path": "extensions/qa-lab/src/character-eval.test.ts",
+        "start": 706,
+        "end": 732,
+        "group": "9587174a65da"
+      },
+      {
+        "path": "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+        "start": 117,
+        "end": 122,
+        "group": "ad401a177390"
+      },
+      {
+        "path": "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+        "start": 478,
+        "end": 483,
+        "group": "ad401a177390"
+      },
+      {
+        "path": "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+        "start": 125,
+        "end": 128,
+        "group": "b22e0b9528c9"
+      },
+      {
+        "path": "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+        "start": 129,
+        "end": 132,
+        "group": "b22e0b9528c9"
+      },
+      {
+        "path": "extensions/codex/src/app-server/attempt-steering.test.ts",
+        "start": 136,
+        "end": 139,
+        "group": "b2df761de394"
+      },
+      {
+        "path": "extensions/codex/src/app-server/attempt-steering.test.ts",
+        "start": 267,
+        "end": 270,
+        "group": "b2df761de394"
+      },
+      {
+        "path": "src/infra/device-bootstrap.test.ts",
+        "start": 306,
+        "end": 318,
+        "group": "b73d51d67463"
+      },
+      {
+        "path": "src/infra/device-bootstrap.test.ts",
+        "start": 359,
+        "end": 371,
+        "group": "b73d51d67463"
+      },
+      {
+        "path": "src/agents/subagent-registry-restart-recovery.test.ts",
+        "start": 625,
+        "end": 629,
+        "group": "b9ef563f6624"
+      },
+      {
+        "path": "src/agents/subagent-registry-restart-recovery.test.ts",
+        "start": 892,
+        "end": 896,
+        "group": "b9ef563f6624"
+      },
+      {
+        "path": "extensions/codex/src/app-server/elicitation-bridge.ts",
+        "start": 817,
+        "end": 820,
+        "group": "debfdf3001d3"
+      },
+      {
+        "path": "extensions/codex/src/app-server/elicitation-bridge.ts",
+        "start": 822,
+        "end": 825,
+        "group": "debfdf3001d3"
+      },
+      {
+        "path": "src/agents/subagent-registry-restart-recovery.test.ts",
+        "start": 177,
+        "end": 183,
+        "group": "ea2338dd6cdc"
+      },
+      {
+        "path": "src/agents/subagent-registry-restart-recovery.test.ts",
+        "start": 450,
+        "end": 456,
+        "group": "ea2338dd6cdc"
+      },
+      {
+        "path": "src/agents/subagent-registry-restart-recovery-coordinator.ts",
+        "start": 76,
+        "end": 79,
+        "group": "ea4fdfdf2a29"
+      },
+      {
+        "path": "src/agents/subagent-registry-restart-recovery-coordinator.ts",
+        "start": 93,
+        "end": 96,
+        "group": "ea4fdfdf2a29"
+      }
+    ]
+  },
+  "historical_overlap": {
+    "reference": "results.json: fork 0.2.0+vk.1",
+    "excluded": [
+      "src/agents/cli-runner.before-agent-reply-cron.test.ts",
+      "src/infra/backup-create.ts",
+      "extensions/codex/src/app-server/run-attempt-test-harness.ts"
+    ],
+    "equivalent": {
+      "files": 47,
+      "sloc": 12843,
+      "symbol_sha256": "e28f273fbd1ea1832ab73d4bf0af4f32d24d2501767cf354a707a9aaed2603c2",
+      "clone_sloc": 250,
+      "clone_groups": 19
+    }
+  }
+}

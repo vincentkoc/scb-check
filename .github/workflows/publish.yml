@@ -13,7 +13,7 @@ concurrency:
 jobs:
   publish:
     name: Publish package
-    if: ${{ !github.event.release.prerelease }}
+    if: ${{ github.repository == 'gabeorlanski/scb-check' && !github.event.release.prerelease }}
     runs-on: ubuntu-latest
     environment: pypi
 
@@ -89,10 +89,10 @@ jobs:
       - name: Install locked dependencies
         run: uv sync --locked --all-groups --python 3.13
 
-      - name: Verify exported hash locks are current
+      - name: Verify exported requirements are current
         run: |
-          uv export --format requirements.txt --no-dev --no-emit-project --frozen --output-file requirements.lock
-          uv export --format requirements.txt --all-groups --no-emit-project --frozen --output-file requirements-dev.lock
+          uv export --format requirements.txt --no-dev --no-emit-project --frozen --no-hashes --output-file requirements.lock
+          uv export --format requirements.txt --all-groups --no-emit-project --frozen --no-hashes --output-file requirements-dev.lock
           git diff --exit-code -- requirements.lock requirements-dev.lock
 
       - name: Run quality gate
@@ -143,7 +143,7 @@ jobs:
       - name: Smoke-test wheel install
         run: |
           uv venv --seed --python 3.13 .smoke-venv
-          .smoke-venv/bin/python -m pip install --require-hashes -r requirements.lock
+          .smoke-venv/bin/python -m pip install -r requirements.lock
           .smoke-venv/bin/python -m pip install --no-deps dist/*.whl
           .smoke-venv/bin/scb-check --help
 

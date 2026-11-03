@@ -2,6 +2,25 @@
 
 All notable user-facing changes to `scb-check` are documented here.
 
+## [0.2.0+vk.2] - 2026-11-03
+
+### Fixed
+
+- Pin a native TypeScript grammar fork that accepts type-only wildcard exports,
+  import member type arguments, and array, indexed and parenthesized import
+  types. Application source is not rewritten.
+- Parse all 50 files in the frozen public corpus; keep the 54 labelled clone
+  cases unchanged. Changed coverage requires a new scan baseline.
+
+### Added
+
+- Syntax, source-span, invalid-input and runtime-function regressions, plus
+  explicit expected failures for the inherited generic-await AST ownership gap.
+- Git-pinned grammar provenance and source-build requirements. The uv lock is
+  authoritative; requirements exports pin versions and Git revisions without
+  hashes because pip cannot hash Git source requirements. Registry publishing
+  remains restricted to the upstream repository.
+
 ## [0.2.0+vk.1] - 2026-11-03
 
 ### Fixed

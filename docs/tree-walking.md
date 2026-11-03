@@ -139,3 +139,13 @@ Effects are derived from normalized operations and values. Invocation values bec
 - Add enum members or IR fields only when at least one real rule or scoring path needs them.
 - When adding syntax support, update parser tests, semantic tests, and any affected scoring docs.
 - When adding a new language, add a parser config/module, dispatch mapping, `Language` value, discovery support, clone config, tests, and docs deliberately; do not make Python-specific assumptions in structural rules.
+
+## TypeScript grammar coverage
+
+The native Git-pinned grammar accepts type-only wildcard exports and import
+member types with type arguments, array/indexed suffixes and parentheses.
+Source text and spans are preserved; no source preprocessing is used.
+The inherited generic-await ownership issue remains an explicit expected
+failure in the parser regressions. Syntax coverage does not establish full
+TypeScript AST correctness. The fork and generator proof are documented in the
+[grammar repository](https://github.com/vincentkoc/tree-sitter-typescript).

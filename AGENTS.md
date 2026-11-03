@@ -19,6 +19,13 @@ Keep these docs up to date. When behavior, scoring, CLI contracts, source direct
 - **Verbosity is a union**, not a sum. Clone lines ∪ ast-grep lines per file, intersected with SLOC lines. Don't double-count. Non-Python languages currently contribute clone LOC only.
 - **Dataclasses are `frozen=True, slots=True`** (see [`src/scb_check/models.py`](src/scb_check/models.py)). Pass tuples across module boundaries, not lists.
 
+## TypeScript dependency
+
+The native grammar is Git-pinned for `0.2.0+vk.2`; keep its exact revision in
+`pyproject.toml`, `uv.lock` and requirements exports synchronized. Syntax support
+and known AST ownership gaps are qualified separately. Use a new measurement
+baseline after engine or grammar changes.
+
 ## Workflow (every change)
 
 1. Write **behavioral** tests — assert observable behavior, not rendering strings or call order.
