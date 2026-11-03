@@ -40,7 +40,7 @@ tree-sitter-python==0.25.0
     # via scb-check
 tree-sitter-rust==0.24.2
     # via scb-check
-tree-sitter-typescript @ git+https://github.com/vincentkoc/tree-sitter-typescript@11b6b729d31a9161a04abdbd0904de0780003b50
+tree-sitter-typescript @ git+https://github.com/vincentkoc/tree-sitter-typescript@2ec69f5037f56a99a0d0c0e1a191d0eef50afe49
     # via scb-check
 tree-sitter-zig==1.1.2
     # via scb-check

@@ -145,7 +145,9 @@ Effects are derived from normalized operations and values. Invocation values bec
 The native Git-pinned grammar accepts type-only wildcard exports and import
 member types with type arguments, array/indexed suffixes and parentheses.
 Source text and spans are preserved; no source preprocessing is used.
-The inherited generic-await ownership issue remains an explicit expected
-failure in the parser regressions. Syntax coverage does not establish full
+Generic calls and their postfix chains remain inside `await` expressions;
+comparisons, constructor arguments and explicit parentheses retain their scope.
+The grammar fork includes TypeScript 6.0.3 compiler-reference shapes and records
+its remaining known gaps separately. Syntax coverage does not establish full
 TypeScript AST correctness. The fork and generator proof are documented in the
 [grammar repository](https://github.com/vincentkoc/tree-sitter-typescript).
