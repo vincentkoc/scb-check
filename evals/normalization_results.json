@@ -1,0 +1,602 @@
+{
+  "schema": 1,
+  "kind": "eval-only-normalization-experiment",
+  "engine": "0.2.0+vk.3",
+  "python": "3.13.13",
+  "grammar": {
+    "version": "0.23.2+vk.2",
+    "url": "https://github.com/vincentkoc/tree-sitter-typescript",
+    "vcs_info": {
+      "vcs": "git",
+      "commit_id": "2ec69f5037f56a99a0d0c0e1a191d0eef50afe49",
+      "requested_revision": "2ec69f5037f56a99a0d0c0e1a191d0eef50afe49"
+    }
+  },
+  "dependency_lock_sha256": "ae92644a1b7a01d97113127cdf08b7afe66a37c4408f2e6d8d976f397eb0a9ba",
+  "analyzer_sha256": "b6ff40a5fff76ddd8169684eea765f0ab5f0581db73d1ae5017ae4a0c4ec42f7",
+  "evaluator_sha256": "a888198ad0908ec2a37816460ae720ae0f5eb2cfa10e30ecc222fa06a9d969ae",
+  "label_evaluator_sha256": "1bbb51fd392639cc81f13126d724f3439d0e886652691ab23d13526a313298ca",
+  "variants": {
+    "baseline": {
+      "legacy": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1",
+        "suite_sha256": "33f26515288712a48416b283774ecb98fff1ecdf1ee431b9bc8394a5c619aaf5",
+        "splits": {
+          "holdout": {
+            "cases": 44,
+            "passed": 44,
+            "tp": 48,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "tune": {
+            "cases": 16,
+            "passed": 16,
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        },
+        "failures": []
+      },
+      "source_derived": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1/code-literals-v1",
+        "suite_sha256": "9725cdaee969d465a465774ffcc5e792b8ddc8cf92c64caf15c37d13ba8e9e6b",
+        "splits": {
+          "holdout": {
+            "cases": 8,
+            "passed": 5,
+            "tp": 8,
+            "fp": 6,
+            "fn": 0,
+            "precision": 0.5714285714285714,
+            "recall": 1.0
+          },
+          "tune": {
+            "cases": 8,
+            "passed": 6,
+            "tp": 10,
+            "fp": 4,
+            "fn": 0,
+            "precision": 0.7142857142857143,
+            "recall": 1.0
+          }
+        },
+        "failures": [
+          "E1-patterns",
+          "E3-flags",
+          "R1-extractors",
+          "R4-expression-operator",
+          "W4-binding-order"
+        ]
+      },
+      "corpus": {
+        "engine": "0.2.0+vk.3",
+        "repository": "https://github.com/openclaw/openclaw",
+        "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+        "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+        "requested_files": 50,
+        "files": 50,
+        "parse_failures": [],
+        "sloc": 14845,
+        "symbol_sha256": "4a5f9e00c2274218801a151e5d323d7c93d9e8d2610a0b6d94b110a4d411c7b4",
+        "clone_sloc": 282,
+        "clone_groups": 23,
+        "group_spans_sha256": "da46fc7292f97ebf5e0a7920eebdb08a97eedd7ac1131fa7e23fe79b8c05d633",
+        "removed_groups": [],
+        "added_groups": []
+      }
+    },
+    "regex-exact": {
+      "legacy": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1",
+        "suite_sha256": "33f26515288712a48416b283774ecb98fff1ecdf1ee431b9bc8394a5c619aaf5",
+        "splits": {
+          "holdout": {
+            "cases": 44,
+            "passed": 44,
+            "tp": 48,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "tune": {
+            "cases": 16,
+            "passed": 16,
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        },
+        "failures": []
+      },
+      "source_derived": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1/code-literals-v1",
+        "suite_sha256": "9725cdaee969d465a465774ffcc5e792b8ddc8cf92c64caf15c37d13ba8e9e6b",
+        "splits": {
+          "holdout": {
+            "cases": 8,
+            "passed": 6,
+            "tp": 8,
+            "fp": 4,
+            "fn": 0,
+            "precision": 0.6666666666666666,
+            "recall": 1.0
+          },
+          "tune": {
+            "cases": 8,
+            "passed": 8,
+            "tp": 10,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        },
+        "failures": [
+          "R4-expression-operator",
+          "W4-binding-order"
+        ]
+      },
+      "corpus": {
+        "engine": "0.2.0+vk.3",
+        "repository": "https://github.com/openclaw/openclaw",
+        "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+        "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+        "requested_files": 50,
+        "files": 50,
+        "parse_failures": [],
+        "sloc": 14845,
+        "symbol_sha256": "4a5f9e00c2274218801a151e5d323d7c93d9e8d2610a0b6d94b110a4d411c7b4",
+        "clone_sloc": 264,
+        "clone_groups": 21,
+        "group_spans_sha256": "3ab091022c719622c7536e2de5a6ba0d13d0ff92d192869f6ac5cf6d4b7e67ee",
+        "removed_groups": [
+          [
+            [
+              "extensions/codex/src/app-server/elicitation-bridge.ts",
+              817,
+              820
+            ],
+            [
+              "extensions/codex/src/app-server/elicitation-bridge.ts",
+              822,
+              825
+            ]
+          ],
+          [
+            [
+              "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+              600,
+              607
+            ],
+            [
+              "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+              609,
+              616
+            ]
+          ]
+        ],
+        "added_groups": []
+      }
+    },
+    "template-structure": {
+      "legacy": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1",
+        "suite_sha256": "33f26515288712a48416b283774ecb98fff1ecdf1ee431b9bc8394a5c619aaf5",
+        "splits": {
+          "holdout": {
+            "cases": 44,
+            "passed": 44,
+            "tp": 48,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "tune": {
+            "cases": 16,
+            "passed": 16,
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        },
+        "failures": []
+      },
+      "source_derived": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1/code-literals-v1",
+        "suite_sha256": "9725cdaee969d465a465774ffcc5e792b8ddc8cf92c64caf15c37d13ba8e9e6b",
+        "splits": {
+          "holdout": {
+            "cases": 8,
+            "passed": 7,
+            "tp": 8,
+            "fp": 2,
+            "fn": 0,
+            "precision": 0.8,
+            "recall": 1.0
+          },
+          "tune": {
+            "cases": 8,
+            "passed": 6,
+            "tp": 10,
+            "fp": 4,
+            "fn": 0,
+            "precision": 0.7142857142857143,
+            "recall": 1.0
+          }
+        },
+        "failures": [
+          "E1-patterns",
+          "E3-flags",
+          "R1-extractors"
+        ]
+      },
+      "corpus": {
+        "engine": "0.2.0+vk.3",
+        "repository": "https://github.com/openclaw/openclaw",
+        "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+        "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+        "requested_files": 50,
+        "files": 50,
+        "parse_failures": [],
+        "sloc": 14845,
+        "symbol_sha256": "4a5f9e00c2274218801a151e5d323d7c93d9e8d2610a0b6d94b110a4d411c7b4",
+        "clone_sloc": 276,
+        "clone_groups": 22,
+        "group_spans_sha256": "68ef96ae030fb516ff908233834953cb3bb932898d96437ac025f2e330a1208a",
+        "removed_groups": [
+          [
+            [
+              "extensions/matrix/src/matrix/monitor/index.test.ts",
+              601,
+              604
+            ],
+            [
+              "extensions/matrix/src/matrix/monitor/index.test.ts",
+              661,
+              664
+            ]
+          ]
+        ],
+        "added_groups": []
+      }
+    },
+    "embedded-code": {
+      "legacy": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1",
+        "suite_sha256": "33f26515288712a48416b283774ecb98fff1ecdf1ee431b9bc8394a5c619aaf5",
+        "splits": {
+          "holdout": {
+            "cases": 44,
+            "passed": 44,
+            "tp": 48,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "tune": {
+            "cases": 16,
+            "passed": 16,
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        },
+        "failures": []
+      },
+      "source_derived": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1/code-literals-v1",
+        "suite_sha256": "9725cdaee969d465a465774ffcc5e792b8ddc8cf92c64caf15c37d13ba8e9e6b",
+        "splits": {
+          "holdout": {
+            "cases": 8,
+            "passed": 8,
+            "tp": 8,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "tune": {
+            "cases": 8,
+            "passed": 8,
+            "tp": 10,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        },
+        "failures": []
+      },
+      "corpus": {
+        "engine": "0.2.0+vk.3",
+        "repository": "https://github.com/openclaw/openclaw",
+        "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+        "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+        "requested_files": 50,
+        "files": 50,
+        "parse_failures": [],
+        "sloc": 14845,
+        "symbol_sha256": "4a5f9e00c2274218801a151e5d323d7c93d9e8d2610a0b6d94b110a4d411c7b4",
+        "clone_sloc": 258,
+        "clone_groups": 20,
+        "group_spans_sha256": "86317f8a58272b4fa1da40b5109df8e5606d8ad5049b09fe63cb7bd251fb4287",
+        "removed_groups": [
+          [
+            [
+              "extensions/codex/src/app-server/elicitation-bridge.ts",
+              817,
+              820
+            ],
+            [
+              "extensions/codex/src/app-server/elicitation-bridge.ts",
+              822,
+              825
+            ]
+          ],
+          [
+            [
+              "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+              600,
+              607
+            ],
+            [
+              "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+              609,
+              616
+            ]
+          ],
+          [
+            [
+              "extensions/matrix/src/matrix/monitor/index.test.ts",
+              601,
+              604
+            ],
+            [
+              "extensions/matrix/src/matrix/monitor/index.test.ts",
+              661,
+              664
+            ]
+          ]
+        ],
+        "added_groups": []
+      }
+    },
+    "exact-literals": {
+      "legacy": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1",
+        "suite_sha256": "33f26515288712a48416b283774ecb98fff1ecdf1ee431b9bc8394a5c619aaf5",
+        "splits": {
+          "holdout": {
+            "cases": 44,
+            "passed": 36,
+            "tp": 32,
+            "fp": 0,
+            "fn": 16,
+            "precision": 1.0,
+            "recall": 0.6666666666666666
+          },
+          "tune": {
+            "cases": 16,
+            "passed": 13,
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "precision": null,
+            "recall": 0.0
+          }
+        },
+        "failures": [
+          "js-two-statements",
+          "js-arrow-block",
+          "js-generator",
+          "ts-two-statements",
+          "ts-arrow-block",
+          "ts-generator",
+          "python-two-statements",
+          "rs-positive",
+          "cpp-positive",
+          "zig-positive",
+          "hs-positive"
+        ]
+      },
+      "source_derived": {
+        "engine": "0.2.0+vk.3",
+        "policy": "statement-bodies-v1/code-literals-v1",
+        "suite_sha256": "9725cdaee969d465a465774ffcc5e792b8ddc8cf92c64caf15c37d13ba8e9e6b",
+        "splits": {
+          "holdout": {
+            "cases": 8,
+            "passed": 5,
+            "tp": 2,
+            "fp": 0,
+            "fn": 6,
+            "precision": 1.0,
+            "recall": 0.25
+          },
+          "tune": {
+            "cases": 8,
+            "passed": 5,
+            "tp": 4,
+            "fp": 0,
+            "fn": 6,
+            "precision": 1.0,
+            "recall": 0.4
+          }
+        },
+        "failures": [
+          "E4-data",
+          "M2-capacities",
+          "M4-key-text",
+          "R2-error-prose",
+          "R3-expression-data",
+          "W2-message-data"
+        ]
+      },
+      "corpus": {
+        "engine": "0.2.0+vk.3",
+        "repository": "https://github.com/openclaw/openclaw",
+        "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+        "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+        "requested_files": 50,
+        "files": 50,
+        "parse_failures": [],
+        "sloc": 14845,
+        "symbol_sha256": "4a5f9e00c2274218801a151e5d323d7c93d9e8d2610a0b6d94b110a4d411c7b4",
+        "clone_sloc": 108,
+        "clone_groups": 14,
+        "group_spans_sha256": "a02516abded567625c91bd402dbc46ac5fce2c00c1858a86ea3a72fe69c5330f",
+        "removed_groups": [
+          [
+            [
+              "extensions/codex/src/app-server/elicitation-bridge.ts",
+              817,
+              820
+            ],
+            [
+              "extensions/codex/src/app-server/elicitation-bridge.ts",
+              822,
+              825
+            ]
+          ],
+          [
+            [
+              "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+              600,
+              607
+            ],
+            [
+              "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+              609,
+              616
+            ]
+          ],
+          [
+            [
+              "extensions/matrix/src/matrix/monitor/index.test.ts",
+              601,
+              604
+            ],
+            [
+              "extensions/matrix/src/matrix/monitor/index.test.ts",
+              661,
+              664
+            ]
+          ],
+          [
+            [
+              "extensions/qa-lab/src/character-eval.test.ts",
+              152,
+              158
+            ],
+            [
+              "extensions/qa-lab/src/character-eval.test.ts",
+              160,
+              166
+            ]
+          ],
+          [
+            [
+              "extensions/qa-lab/src/character-eval.test.ts",
+              536,
+              562
+            ],
+            [
+              "extensions/qa-lab/src/character-eval.test.ts",
+              623,
+              648
+            ],
+            [
+              "extensions/qa-lab/src/character-eval.test.ts",
+              650,
+              676
+            ],
+            [
+              "extensions/qa-lab/src/character-eval.test.ts",
+              678,
+              704
+            ],
+            [
+              "extensions/qa-lab/src/character-eval.test.ts",
+              706,
+              732
+            ]
+          ],
+          [
+            [
+              "src/agents/worktrees/service.orphans.test.ts",
+              83,
+              88
+            ],
+            [
+              "src/agents/worktrees/service.orphans.test.ts",
+              90,
+              95
+            ]
+          ],
+          [
+            [
+              "src/agents/worktrees/service.orphans.test.ts",
+              97,
+              102
+            ],
+            [
+              "src/agents/worktrees/service.orphans.test.ts",
+              104,
+              109
+            ]
+          ],
+          [
+            [
+              "src/gateway/server-methods/system-agent.ts",
+              533,
+              540
+            ],
+            [
+              "src/gateway/server-methods/system-agent.ts",
+              710,
+              717
+            ]
+          ],
+          [
+            [
+              "src/infra/device-bootstrap.test.ts",
+              306,
+              318
+            ],
+            [
+              "src/infra/device-bootstrap.test.ts",
+              359,
+              371
+            ]
+          ]
+        ],
+        "added_groups": []
+      }
+    }
+  }
+}

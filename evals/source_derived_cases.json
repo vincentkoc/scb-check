@@ -1,0 +1,480 @@
+{
+  "schema": 1,
+  "policy": "statement-bodies-v1/code-literals-v1",
+  "label_scope": "Candidate structural matching: regex source and template expression structure are significant; ordinary data and consistent identifier renames normalize. This is not refactoring usefulness.",
+  "source": {
+    "repository": "https://github.com/openclaw/openclaw",
+    "revision": "c67556df310f7cc50798ef51beac33a43714356a",
+    "manifest_sha256": "9c0741d15828c4cf2d924027da65c303223a60ad43f62efa325b866d8032f3ec",
+    "license": "LICENSE.openclaw"
+  },
+  "families": {
+    "elicitation": {
+      "split": "tune",
+      "path": "extensions/codex/src/app-server/elicitation-bridge.ts",
+      "sha256": "f8630bb1a13cd7535d3ad4ac51eb1f25d8eaf93796bfa20f3965e4fb605355e4",
+      "spans": [
+        [
+          817,
+          825
+        ]
+      ]
+    },
+    "matrix": {
+      "split": "tune",
+      "path": "extensions/matrix/src/matrix/sdk/decrypt-bridge.ts",
+      "sha256": "9f58532aaeacb256c4515dda88e3468d48763d148815624ad70374ba8943279f",
+      "spans": [
+        [
+          461,
+          467
+        ],
+        [
+          470,
+          476
+        ],
+        [
+          487,
+          493
+        ]
+      ]
+    },
+    "relay": {
+      "split": "holdout",
+      "path": "extensions/codex/src/app-server/run-attempt-test-harness.ts",
+      "sha256": "0225bc5c359636f97325a8aa1912b13822b84b33e26dd9d581b1fbda129aa432",
+      "spans": [
+        [
+          600,
+          607
+        ],
+        [
+          609,
+          616
+        ]
+      ]
+    },
+    "wizard": {
+      "split": "holdout",
+      "path": "src/gateway/server-methods/system-agent.ts",
+      "sha256": "c0420ebd93eb530ce9d3d72bca051a42af24acca571a352a137fd8d7926aa843",
+      "spans": [
+        [
+          340,
+          343
+        ],
+        [
+          394,
+          397
+        ]
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "E1-patterns",
+      "family": "elicitation",
+      "split": "tune",
+      "reason": "Exact excerpts: the candidate policy distinguishes approval and persistence regex programs. The baseline normalizes both regexes.",
+      "usefulness": "Low/contextual: separate domain predicates can reasonably share short scaffolding.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function isApprovalField(property: ApprovalPropertyContext): boolean {\n  const haystack = propertyText(property).toLowerCase();\n  return /\\b(approve|approval|allow|accept|decision)\\b/.test(haystack);\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function isPersistField(property: ApprovalPropertyContext): boolean {\n  const haystack = propertyText(property).toLowerCase();\n  return /\\b(persist|session|always|scope)\\b/.test(haystack);\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "E2-renames",
+      "family": "elicitation",
+      "split": "tune",
+      "reason": "Consistently rename function, parameter and local identifiers; retain the same regex program.",
+      "usefulness": "Contextual: repeated implementations of the same predicate may drift.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function isApprovalField(property: ApprovalPropertyContext): boolean {\n  const haystack = propertyText(property).toLowerCase();\n  return /\\b(approve|approval|allow|accept|decision)\\b/.test(haystack);\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function acceptsApproval(entry: ApprovalPropertyContext): boolean {\n  const text = propertyText(entry).toLowerCase();\n  return /\\b(approve|approval|allow|accept|decision)\\b/.test(text);\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "E3-flags",
+      "family": "elicitation",
+      "split": "tune",
+      "reason": "Change only regex flags from none to i; the proposed policy preserves flags.",
+      "usefulness": "Contextual: a parameterized matcher is possible but is not automatically worthwhile.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function isApprovalField(property: ApprovalPropertyContext): boolean {\n  const haystack = propertyText(property).toLowerCase();\n  return /\\b(approve|approval|allow|accept|decision)\\b/.test(haystack);\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function isApprovalField(property: ApprovalPropertyContext): boolean {\n  const haystack = propertyText(property).toLowerCase();\n  return /\\b(approve|approval|allow|accept|decision)\\b/i.test(haystack);\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "E4-data",
+      "family": "elicitation",
+      "split": "tune",
+      "reason": "Add padding with different numeric and ordinary string data; the regex program and expression structure match.",
+      "usefulness": "Contextual: tests data normalization rather than recommending abstraction.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function isApprovalField(property: ApprovalPropertyContext): boolean {\n  const haystack = propertyText(property).toLowerCase().padStart(3, \" \");\n  return /\\b(approve|approval|allow|accept|decision)\\b/.test(haystack);\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function isApprovalField(property: ApprovalPropertyContext): boolean {\n  const haystack = propertyText(property).toLowerCase().padStart(5, \"_\");\n  return /\\b(approve|approval|allow|accept|decision)\\b/.test(haystack);\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "M1-eviction",
+      "family": "matrix",
+      "split": "tune",
+      "reason": "Exact excerpts: both loops evict the oldest entries until below the configured bound.",
+      "usefulness": "Likely candidate: one bounded-map eviction algorithm with different caches and capacity names.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "while (this.exhaustedDecryptRetries.size > MATRIX_DECRYPT_EXHAUSTED_RETRY_MAX_ENTRIES) {\n  const oldest = this.exhaustedDecryptRetries.keys().next().value;\n  if (oldest === undefined) {\n    break;\n  }\n  this.exhaustedDecryptRetries.delete(oldest);\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "while (this.decryptedMessageDedupe.size > maxEntries) {\n  const oldest = this.decryptedMessageDedupe.keys().next().value;\n  if (oldest === undefined) {\n    break;\n  }\n  this.decryptedMessageDedupe.delete(oldest);\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            7
+          ],
+          [
+            "right.ts",
+            1,
+            7
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "M2-capacities",
+      "family": "matrix",
+      "split": "tune",
+      "reason": "Replace the limit with literal capacities and consistently rename cache and key identifiers.",
+      "usefulness": "Likely candidate: capacity is a parameter of the shared algorithm.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "while (this.exhaustedDecryptRetries.size > 64) {\n  const oldest = this.exhaustedDecryptRetries.keys().next().value;\n  if (oldest === undefined) {\n    break;\n  }\n  this.exhaustedDecryptRetries.delete(oldest);\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "while (this.cache.size > 256) {\n  const key = this.cache.keys().next().value;\n  if (key === undefined) {\n    break;\n  }\n  this.cache.delete(key);\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            7
+          ],
+          [
+            "right.ts",
+            1,
+            7
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "M3-boundary",
+      "family": "matrix",
+      "split": "tune",
+      "reason": "Change the significant loop-boundary operator from > to >=.",
+      "usefulness": "Behavior differs: helper extraction would need an explicit boundary decision.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "while (this.exhaustedDecryptRetries.size > MATRIX_DECRYPT_EXHAUSTED_RETRY_MAX_ENTRIES) {\n  const oldest = this.exhaustedDecryptRetries.keys().next().value;\n  if (oldest === undefined) {\n    break;\n  }\n  this.exhaustedDecryptRetries.delete(oldest);\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "while (this.exhaustedDecryptRetries.size >= MATRIX_DECRYPT_EXHAUSTED_RETRY_MAX_ENTRIES) {\n  const oldest = this.exhaustedDecryptRetries.keys().next().value;\n  if (oldest === undefined) {\n    break;\n  }\n  this.exhaustedDecryptRetries.delete(oldest);\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "M4-key-text",
+      "family": "matrix",
+      "split": "tune",
+      "reason": "Reduce the key construction from rememberDecryptedMessage to a two-statement function; rename parameters and change only static template text.",
+      "usefulness": "Contextual: delimiters may intentionally differ; executable expression structure matches.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "function key(roomId: string, eventId: string) {\n  const value = `${roomId}|${eventId}`;\n  return value;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "function key(channelId: string, messageId: string) {\n  const value = `${channelId}:${messageId}`;\n  return value;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "R1-extractors",
+      "family": "relay",
+      "split": "holdout",
+      "reason": "Exact excerpts: the proposed regex-program policy distinguishes relay-id and generation patterns. Baseline type-2 matching groups them.",
+      "usefulness": "Likely candidate despite the nonmatch: one parameterized argument extractor could be useful. This is a recall cost of the stricter policy.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "export function extractRelayIdFromThreadRequest(params: unknown): string {\n  const command = extractNativeHookRelayCommandFromThreadRequest(params);\n  const match = command.match(/--relay-id ([^ ]+)/);\n  if (!match?.[1]) {\n    throw new Error(`relay id missing from command: ${command}`);\n  }\n  return match[1];\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "export function extractGenerationFromThreadRequest(params: unknown): string {\n  const command = extractNativeHookRelayCommandFromThreadRequest(params);\n  const match = command.match(/--generation ([^ ]+)/);\n  if (!match?.[1]) {\n    throw new Error(`relay generation missing from command: ${command}`);\n  }\n  return match[1];\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "R2-error-prose",
+      "family": "relay",
+      "split": "holdout",
+      "reason": "Copy the relay extractor and change only static error prose around the unchanged substitution.",
+      "usefulness": "Contextual: error-message data should not defeat a structural match.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "export function extractRelayIdFromThreadRequest(params: unknown): string {\n  const command = extractNativeHookRelayCommandFromThreadRequest(params);\n  const match = command.match(/--relay-id ([^ ]+)/);\n  if (!match?.[1]) {\n    throw new Error(`relay id missing from command: ${command}`);\n  }\n  return match[1];\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "export function extractRelayIdFromThreadRequest(params: unknown): string {\n  const command = extractNativeHookRelayCommandFromThreadRequest(params);\n  const match = command.match(/--relay-id ([^ ]+)/);\n  if (!match?.[1]) {\n    throw new Error(`missing relay argument in: ${command}`);\n  }\n  return match[1];\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            8
+          ],
+          [
+            "right.ts",
+            1,
+            8
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "R3-expression-data",
+      "family": "relay",
+      "split": "holdout",
+      "reason": "Change the error substitution to length + a literal, then consistently rename command and vary the numeric literal.",
+      "usefulness": "Normalization control: data values and consistent names remain abstracted inside substitutions.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "export function extractRelayIdFromThreadRequest(params: unknown): string {\n  const command = extractNativeHookRelayCommandFromThreadRequest(params);\n  const match = command.match(/--relay-id ([^ ]+)/);\n  if (!match?.[1]) {\n    throw new Error(`relay id missing from command: ${command.length + 1}`);\n  }\n  return match[1];\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "export function extractRelayIdFromThreadRequest(params: unknown): string {\n  const text = extractNativeHookRelayCommandFromThreadRequest(params);\n  const match = text.match(/--relay-id ([^ ]+)/);\n  if (!match?.[1]) {\n    throw new Error(`relay id missing from text: ${text.length + 2}`);\n  }\n  return match[1];\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            8
+          ],
+          [
+            "right.ts",
+            1,
+            8
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "R4-expression-operator",
+      "family": "relay",
+      "split": "holdout",
+      "reason": "Change only the executable operator inside the error substitution from + to -.",
+      "usefulness": "Behavior differs; source matching must retain the expression structure.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "export function extractRelayIdFromThreadRequest(params: unknown): string {\n  const command = extractNativeHookRelayCommandFromThreadRequest(params);\n  const match = command.match(/--relay-id ([^ ]+)/);\n  if (!match?.[1]) {\n    throw new Error(`relay id missing from command: ${command.length + 1}`);\n  }\n  return match[1];\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "export function extractRelayIdFromThreadRequest(params: unknown): string {\n  const command = extractNativeHookRelayCommandFromThreadRequest(params);\n  const match = command.match(/--relay-id ([^ ]+)/);\n  if (!match?.[1]) {\n    throw new Error(`relay id missing from command: ${command.length - 1}`);\n  }\n  return match[1];\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "W1-guards",
+      "family": "wizard",
+      "split": "holdout",
+      "reason": "Exact excerpts: repeated running-wizard guards have identical response and early-return structure.",
+      "usefulness": "Low/contextual: four-line protocol guards may be clearer inline.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "if (context.findRunningWizard()) {\n  respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, \"wizard already running\"));\n  return;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "if (context.findRunningWizard()) {\n  respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, \"wizard already running\"));\n  return;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "W2-message-data",
+      "family": "wizard",
+      "split": "holdout",
+      "reason": "Change only ordinary error-message string data.",
+      "usefulness": "Low/contextual: a different message alone does not justify a helper.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "if (context.findRunningWizard()) {\n  respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, \"wizard already running\"));\n  return;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "if (context.findRunningWizard()) {\n  respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, \"another wizard is active\"));\n  return;\n}\n"
+        }
+      ],
+      "expected_groups": [
+        [
+          [
+            "left.ts",
+            1,
+            4
+          ],
+          [
+            "right.ts",
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "W3-condition",
+      "family": "wizard",
+      "split": "holdout",
+      "reason": "Negate the guard condition; the operator is significant.",
+      "usefulness": "Behavior differs; no mechanical extraction recommendation.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "if (context.findRunningWizard()) {\n  respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, \"wizard already running\"));\n  return;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "if (!context.findRunningWizard()) {\n  respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, \"wizard already running\"));\n  return;\n}\n"
+        }
+      ],
+      "expected_groups": []
+    },
+    {
+      "id": "W4-binding-order",
+      "family": "wizard",
+      "split": "holdout",
+      "reason": "Replace the message with a template and reverse receiver binding order while surrounding identifiers remain fixed.",
+      "usefulness": "Behavior differs: preserve substitution order and identifier relationships.",
+      "files": [
+        {
+          "path": "left.ts",
+          "source": "if (context.findRunningWizard()) {\n  respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, `${context.sessionId}:${params.sessionId}`));\n  return;\n}\n"
+        },
+        {
+          "path": "right.ts",
+          "source": "if (context.findRunningWizard()) {\n  respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, `${params.sessionId}:${context.sessionId}`));\n  return;\n}\n"
+        }
+      ],
+      "expected_groups": []
+    }
+  ]
+}

@@ -81,6 +81,10 @@ Node.js is required only for grammar regeneration. This is a source release,
 not a PyPI release. Generic awaited calls and postfix chains retain their AST
 ownership. Known grammar gaps remain documented in the native fork.
 
+The evaluation tooling also compares source-derived regex/template normalization
+candidates with frozen labels and separate refactoring-usefulness notes. Those
+experiments do not change production scores or the engine version.
+
 ## Configuration
 
 scb-check looks for `scb-check.toml` or a `pyproject.toml` containing `[tool.scb-check]`, `[tool.ruff]`, or `[tool.ty.src]`, walking upward from the current directory until it hits a `.git` root.
