@@ -44,6 +44,7 @@ CLONE_NODE_TYPES = frozenset(
     },
 )
 _MIN_BODY_STATEMENTS = 2
+_MIN_CLONE_SLOC = 3
 _PYTHON_BODY_NODE_TYPES = frozenset({"block"})
 _BODY_CLAUSE_NODE_TYPES = frozenset(
     {
@@ -206,6 +207,11 @@ def _extract_clone_candidate(
 ) -> CloneCandidate | None:
     start_line = node.start_point[0] + 1
     end_line = node.end_point[0] + 1
+    if (
+        len(context.sloc_lines.intersection(range(start_line, end_line + 1)))
+        < _MIN_CLONE_SLOC
+    ):
+        return None
     body_statement_count = max(
         (
             _body_statement_count(container, context)
@@ -234,10 +240,8 @@ def _body_containers(node: Node, language: Language) -> tuple[Node, ...]:
     ):
         body_types = config.body_node_types
 
+    # An expression-valued `body` field contains operands, not statements.
     containers = [child for child in node.children if child.type in body_types]
-    body = node.child_by_field_name("body")
-    if body is not None and not any(body is container for container in containers):
-        containers.insert(0, body)
 
     containers.extend(
         container
@@ -381,19 +385,29 @@ def _python_or_registry(
 
 
 def _clone_node_types(language: Language) -> frozenset[str]:
-    return _python_or_registry(language, CLONE_NODE_TYPES, clone_node_types_for_language)
+    return _python_or_registry(
+        language, CLONE_NODE_TYPES, clone_node_types_for_language
+    )
 
 
 def _comment_node_types(language: Language) -> frozenset[str]:
-    return _python_or_registry(language, frozenset({"comment"}), comment_node_types_for_language)
+    return _python_or_registry(
+        language, frozenset({"comment"}), comment_node_types_for_language
+    )
 
 
 def _identifier_node_types(language: Language) -> frozenset[str]:
-    return _python_or_registry(language, frozenset({"identifier"}), identifier_node_types_for_language)
+    return _python_or_registry(
+        language, frozenset({"identifier"}), identifier_node_types_for_language
+    )
 
 
 def _literal_node_types(language: Language) -> frozenset[str]:
-    return _python_or_registry(language, frozenset(_PYTHON_LITERAL_TOKENS), literal_node_types_for_language)
+    return _python_or_registry(
+        language,
+        frozenset(_PYTHON_LITERAL_TOKENS),
+        literal_node_types_for_language,
+    )
 
 
 def _literal_token(node_type: str, language: Language) -> str:

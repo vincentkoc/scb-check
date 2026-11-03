@@ -75,7 +75,7 @@ CLI (`cli.py` / `commands/`)
 : Python YAML-backed rule run by the `sg` subprocess. Extra local rules come from `SCB_CHECK_EXTRA_SLOP_RULES`.
 
 `clone finding`
-: Duplicate syntax block found by hashing normalized tree-sitter subtrees. Candidates must contain at least two executable body statements in one duplicated body; signatures, comments, blanks, and Python docstrings do not satisfy that threshold.
+: Duplicate syntax block found by hashing normalized tree-sitter subtrees. Candidates must span at least three `SLOC` and contain at least two executable statements in one language-configured statement body. Signatures, comments, blanks, Python docstrings, and expression operands do not satisfy the statement threshold. Statements from separate branch arms are not pooled. See the [versioned clone evaluation](../evals/README.md).
 
 `structural rule`
 : Python class in `rules/` that checks typed IR subjects and returns `RuleFinding | None`.

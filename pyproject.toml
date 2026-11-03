@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "scb-check"
-version = "0.2.0"
+version = "0.2.0+vk.1"
 description = "CLI for measuring verbosity and erosion metrics in supported source codebases"
 readme = "README.md"
 license = "MIT"
@@ -47,7 +47,7 @@ dev = [
 packages = ["src/scb_check"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 addopts = "-q"
 markers = [
     "integration: integration tests that require external tools",

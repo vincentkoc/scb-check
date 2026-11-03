@@ -71,7 +71,9 @@ scb-check rule RULE_ID                  # print YAML or metadata for a specific 
 
 `scb-check check` exits `0` when no findings are reported, `1` when any finding is present (clones, ast-grep hits, structural findings, or high-complexity functions), and `2` for usage errors (bad path, missing config, invalid directives).
 
-Clone detection only emits duplicated syntax blocks with at least two executable body statements. Function signatures, comments, blanks, and Python docstrings do not satisfy that threshold; displayed clone line counts and `--min-duplicate-lines` still use duplicated `SLOC` in the clone span.
+Clone detection only emits duplicated syntax blocks spanning at least three `SLOC` with at least two executable statements in one statement body. Function signatures, comments, blanks, Python docstrings, and expression operands do not satisfy the statement threshold. Expression-bodied arrows are excluded. Displayed clone line counts and `--min-duplicate-lines` still use duplicated `SLOC` in the clone span.
+
+This fork identifies that scoring policy as `statement-bodies-v1` in its [clone quality evaluation](evals/README.md) and uses version `0.2.0+vk.1`. Treat scores from other engine versions as separate baselines.
 
 ## Configuration
 
